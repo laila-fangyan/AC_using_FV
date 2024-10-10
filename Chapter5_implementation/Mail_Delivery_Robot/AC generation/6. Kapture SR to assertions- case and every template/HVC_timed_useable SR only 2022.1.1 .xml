@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<report id="D-RisQ/UC/SRS">
+   <reqGroups>
+      <groups>
+         <group groupId="REQ.1">
+            <title>HVC- TIMED</title>
+            <records>
+               <record id="REQ-196.00">
+                  <title>PWM set to 0 when 24V power off- CASE- defaultcondition- P2</title>
+                  <status>NO_ERRORS</status>
+                  <data>
+                     <template name="case" format="" type="REQUIREMENT">
+                        <instBlock isUsed="false"/>
+                        <instBlock isUsed="true">
+                           <item/>
+                        </instBlock>
+                        <instBlock isUsed="true">
+                           <item>
+                              <slot slotId="choiceT1">
+                                 <slotMember class="choice">occurs</slotMember>
+                              </slot>
+                              <slot slotId="slotT2">
+                                 <slotMember class="op topOp">not </slotMember>
+                                 <slotMember class="keyword">signal </slotMember>
+                                 <slotMember class="signal-ref">mod_sys::ext_pow24VStatus.in.Power_Off</slotMember>
+                              </slot>
+                           </item>
+                        </instBlock>
+                        <instBlock isUsed="true">
+                           <item>
+                              <slot slotId="choiceB1">
+                                 <slotMember class="choice">is true</slotMember>
+                              </slot>
+                              <slot slotId="choiceB2">
+                                 <slotMember class="choice">be true</slotMember>
+                              </slot>
+                              <slot slotId="slotB1">
+                                 <slotMember class="keyword">signal </slotMember>
+                                 <slotMember class="signal-ref">mod_sys::int_dutyCyclePWM1.out?x:{x | x &lt;- duty, x &gt; 0}</slotMember>
+                              </slot>
+                              <slot slotId="slotB2">
+                                 <slotMember class="symbol">(</slotMember>
+                                 <slotMember class="keyword">signal </slotMember>
+                                 <slotMember class="signal-ref">mod_sys::int_dutyCyclePWM1.out?x:{x | x &lt;- duty, x &gt; 0}</slotMember>
+                                 <slotMember class="op"> holds for at most </slotMember>
+                                 <slotMember class="keyword">signal </slotMember>
+                                 <slotMember class="signal-ref">ms(10)</slotMember>
+                                 <slotMember class="symbol">)</slotMember>
+                                 <slotMember class="op topOp"> becomes </slotMember>
+                                 <slotMember class="keyword">signal </slotMember>
+                                 <slotMember class="signal-ref">mod_sys::int_dutyCyclePWM1.out.0</slotMember>
+                              </slot>
+                           </item>
+                        </instBlock>
+                        <instBlock isUsed="true">
+                           <item>
+                              <slot slotId="choiceB2">
+                                 <slotMember class="choice">be true</slotMember>
+                              </slot>
+                              <slot slotId="slotB2">
+                                 <slotMember class="keyword">signal </slotMember>
+                                 <slotMember class="signal-ref">mod_sys::int_dutyCyclePWM1.out.0</slotMember>
+                              </slot>
+                           </item>
+                        </instBlock>
+                        <instBlock isUsed="true">
+                           <item/>
+                        </instBlock>
+                        <blocks>
+                           <block blockType="OPTIONAL"/>
+                           <block blockType="SINGLETON">
+                              <astText>At</astText>
+                              <astText> each time step, the first of the following cases that is true shall apply</astText>
+                              <astText>, </astText>
+                           </block>
+                           <block blockType="OPTIONAL">
+                              <astNoBreak/>
+                              <astText>until
+    </astText>
+                              <astSlot name="slotT2" type="pred"/>
+                              <astText>
+</astText>
+                              <astSlot name="choiceT1" type="choice"/>
+                              <astText>:</astText>
+                           </block>
+                           <block blockType="NON-EMPTY-LIST">
+                              <astText>when
+  </astText>
+                              <astSlot name="slotB1" type="pred"/>
+                              <astText>
+</astText>
+                              <astSlot name="choiceB1" type="choice"/>
+                              <astText> then
+  </astText>
+                              <astSlot name="slotB2" type="pred"/>
+                              <astText>
+shall also </astText>
+                              <astSlot name="choiceB2" type="choice"/>
+                           </block>
+                           <block blockType="OPTIONAL">
+                              <astText>otherwise
+  </astText>
+                              <astSlot name="slotB2" type="pred"/>
+                              <astText>
+shall </astText>
+                              <astSlot name="choiceB2" type="choice"/>
+                           </block>
+                           <block blockType="SINGLETON">
+                              <astNoBreak/>
+                              <astText>.</astText>
+                           </block>
+                        </blocks>
+                     </template>
+                  </data>
+                  <backwardsTr>SR1_1_1</backwardsTr>
+                  <forwardsTr/>
+                  <comment/>
+                  <isDerived>no</isDerived>
+                  <isSafety>no</isSafety>
+                  <isSecurity>no</isSecurity>
+                  <verifiedBy>Other</verifiedBy>
+               </record>
+               <record id="REQ-200.00">
+                  <title>timed State ClosedLoop reachability</title>
+                  <status>NO_ERRORS</status>
+                  <data>
+                     <template name="every" format="" type="REQUIREMENT">
+                        <instBlock isUsed="false"/>
+                        <instBlock isUsed="true">
+                           <item>
+                              <slot slotId="choiceT4">
+                                 <slotMember class="choice">property</slotMember>
+                              </slot>
+                              <slot slotId="slotT3">
+                                 <slotMember class="op fn-call">reachable_timed</slotMember>
+                                 <slotMember class="symbol">(</slotMember>
+                                 <slotMember class="keyword">signal </slotMember>
+                                 <slotMember class="signal-ref">State_machine :: ClosedLoop</slotMember>
+                                 <slotMember class="symbol">, </slotMember>
+                                 <slotMember class="keyword">signal </slotMember>
+                                 <slotMember class="signal-ref">mod_sys</slotMember>
+                                 <slotMember class="symbol">)</slotMember>
+                              </slot>
+                           </item>
+                        </instBlock>
+                        <instBlock isUsed="true">
+                           <item>
+                              <slot slotId="choiceT2">
+                                 <slotMember class="choice">always</slotMember>
+                              </slot>
+                              <slot slotId="choiceT3">
+                                 <slotMember class="choice">be true</slotMember>
+                              </slot>
+                           </item>
+                        </instBlock>
+                        <instBlock isUsed="false"/>
+                        <blocks>
+                           <block blockType="OPTIONAL"/>
+                           <block blockType="SINGLETON">
+                              <astText>The</astText>
+                              <astText> </astText>
+                              <astSlot name="choiceT4" type="choice"/>
+                              <astText>
+</astText>
+                              <astSlot name="slotT3" type="pred"/>
+                           </block>
+                           <block blockType="SINGLETON">
+                              <astText>shall </astText>
+                              <astSlot name="choiceT2" type="choice"/>
+                              <astText> </astText>
+                              <astSlot name="choiceT3" type="choice"/>
+                              <astText>.</astText>
+                           </block>
+                           <block blockType="OPTIONAL"/>
+                        </blocks>
+                     </template>
+                  </data>
+                  <backwardsTr>SR1_1_2</backwardsTr>
+                  <forwardsTr/>
+                  <comment/>
+                  <isDerived>no</isDerived>
+                  <isSafety>no</isSafety>
+                  <isSecurity>no</isSecurity>
+                  <verifiedBy>Other</verifiedBy>
+               </record>
+               <record id="REQ-201.00">
+                  <title>timed module deadlock free</title>
+                  <status>NO_ERRORS</status>
+                  <data>
+                     <template name="every" format="" type="REQUIREMENT">
+                        <instBlock isUsed="false"/>
+                        <instBlock isUsed="true">
+                           <item>
+                              <slot slotId="choiceT4">
+                                 <slotMember class="choice">property</slotMember>
+                              </slot>
+                              <slot slotId="slotT3">
+                                 <slotMember class="op fn-call">deadlock_free_timed</slotMember>
+                                 <slotMember class="symbol">(</slotMember>
+                                 <slotMember class="keyword">signal </slotMember>
+                                 <slotMember class="signal-ref">mod_sys</slotMember>
+                                 <slotMember class="symbol">)</slotMember>
+                              </slot>
+                           </item>
+                        </instBlock>
+                        <instBlock isUsed="true">
+                           <item>
+                              <slot slotId="choiceT2">
+                                 <slotMember class="choice">always</slotMember>
+                              </slot>
+                              <slot slotId="choiceT3">
+                                 <slotMember class="choice">be true</slotMember>
+                              </slot>
+                           </item>
+                        </instBlock>
+                        <instBlock isUsed="false"/>
+                        <blocks>
+                           <block blockType="OPTIONAL"/>
+                           <block blockType="SINGLETON">
+                              <astText>The</astText>
+                              <astText> </astText>
+                              <astSlot name="choiceT4" type="choice"/>
+                              <astText>
+</astText>
+                              <astSlot name="slotT3" type="pred"/>
+                           </block>
+                           <block blockType="SINGLETON">
+                              <astText>shall </astText>
+                              <astSlot name="choiceT2" type="choice"/>
+                              <astText> </astText>
+                              <astSlot name="choiceT3" type="choice"/>
+                              <astText>.</astText>
+                           </block>
+                           <block blockType="OPTIONAL"/>
+                        </blocks>
+                     </template>
+                  </data>
+                  <backwardsTr>SR1_1_3</backwardsTr>
+                  <forwardsTr/>
+                  <comment/>
+                  <isDerived>no</isDerived>
+                  <isSafety>no</isSafety>
+                  <isSecurity>no</isSecurity>
+                  <verifiedBy>Other</verifiedBy>
+               </record>
+            </records>
+         </group>
+      </groups>
+   </reqGroups>
+</report>

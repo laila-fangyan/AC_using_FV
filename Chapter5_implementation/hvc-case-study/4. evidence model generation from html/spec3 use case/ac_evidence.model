@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="ASCII"?>
+<argumentation_:ArtifactReference xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:argumentation_="http://omg.sacm/2.0/argumentation">
+  <name content="FDR checking result is true"/>
+</argumentation_:ArtifactReference>

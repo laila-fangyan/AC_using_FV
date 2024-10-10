@@ -1,0 +1,14 @@
+pre{
+ var javaDate = new Native("java.text.SimpleDateFormat")("dd-MM-yyyy_hhmmss").
+  format(new Native("java.util.Date"));
+ var javaDateString = new String;
+ javaDateString= javaDate.toString();
+ 
+}
+rule AC2Diagram {
+  template : "GSN_AC_R1.egl"
+  target : "GSN_AC_dot/GSN_AC_R1_"+javaDateString+".dot"
+}
+
+
+

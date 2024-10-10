@@ -1,0 +1,449 @@
+digraph assurance_case{
+
+[%var i=0;
+var j=0;
+var size_source_claim: Integer;
+var size_ai: Integer;
+
+var m=0;
+var n=0;
+var size_source_vv: Integer;
+var size_ae: Integer;
+
+
+size_ai=AC!AssertedInference.all.size();
+
+
+size_ae=AC!AssertedEvidence.all.size();
+
+
+//FIRST step is to generate all the strategy and their target claims, and link from target claim to strategy
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//for claim_1 and str_1
+if(size_ai>0)
+{
+//claim_1.name
+("cliam_1_name :"  + AC!AssertedInference.all.at(i).target.first().name.content).println();
+
+//claim_1.content
+("cliam_1_content :"  + AC!AssertedInference.all.at(i).target.first().description.content.value.content.first()).println();
+
+//AC!AssertedInference.all.at(i).target.first().description.content.value.content.first().length().println();
+
+//(AC!AssertedInference.all.at(i).target.first().description.content.value.content.first().subString(0,wrap_len)+ "<br />"+ AC!AssertedInference.all.at(i).target.first().description.content.value.content.first().subString(31, AC!AssertedInference.all.at(i).target.first().description.content.value.content.first().length())).println();
+
+%]
+claim_[%=i+1%] [shape=rect 
+label=< <FONT FACE="times bold">[%=AC!AssertedInference.all.at(i).target.first().name.content%]</FONT> <br />  <FONT FACE="times">[%=AC!AssertedInference.all.at(i).target.first().description.content.value.content.first().wrap(40)%] </FONT>> 
+width=4 
+height=1.7
+fixedsize=true]
+[%
+//str_1
+("str_1_content :"  + AC!AssertedInference.all.at(i).reasoning.content.value.first().content).println();
+%]
+
+strategy_[%=i+1%] [shape=parallelogram
+label=< <FONT FACE="times bold">Strategy</FONT> <br />  <FONT FACE="times">[%=AC!AssertedInference.all.at(i).reasoning.content.value.first().content.wrap(30)%] </FONT>> 
+width=4 height=1.0
+fixedsize=true]
+[%
+// edge from claim_1 to str_1
+("Claim_"+(i+1) + " -> Str_" +(i+1)).println();
+%]
+
+claim_[%=i+1%] -> strategy_[%=i+1%] 
+[%
+i=i+1;
+size_ai=size_ai-1;
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//for the rest AssertedInference
+while(size_ai>0 )
+{
+
+//claim_2.name
+("cliam_"+ (i+1) + " :" + AC!AssertedInference.all.at(i).target.first().name.content).println();
+
+//claim_2.content
+("cliam_"+ (i+1) + "_content :" + AC!AssertedInference.all.at(i).target.first().description.content.value.content.first()).println();
+
+//str_2
+("str"+ (i+1) + " :" + AC!AssertedInference.all.at(i).reasoning.content.value.first().content).println();
+
+// edge from claim_2 to str_2
+("Claim_"+(i+1) + " -> Str_" +(i+1)).println();
+%]
+
+claim_[%=i+1%] [shape=rect 
+label=< <FONT FACE="times bold">[%=AC!AssertedInference.all.at(i).target.first().name.content%]</FONT> <br />  <FONT FACE="times">[%=AC!AssertedInference.all.at(i).target.first().description.content.value.content.first().wrap(40)%] </FONT>> 
+width=4 
+height=1.7
+fixedsize=true]
+
+strategy_[%=i+1%] [shape=parallelogram
+label=< <FONT FACE="times bold">Strategy</FONT> <br />  <FONT FACE="times">[%=AC!AssertedInference.all.at(i).reasoning.content.value.first().content.wrap(30)%]</FONT>> 
+width=4 height=1.0
+fixedsize=true]
+
+claim_[%=i+1%] -> strategy_[%=i+1%] 
+[%
+
+
+
+var t: Integer;
+t=i;
+var k=0;
+
+
+//SECOND step is to link from strategy to the SOURCE claim. THESE strategy and claims have been generated in 1st step
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+//outer loop to search for each inference that has been processed
+// t is index of AssertedInference
+while(t>0 )
+{
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+//inner loop to search for eache source claim
+//k is index of source claim
+//i is index of the specific claim to be discussed
+while(k< AC!AssertedInference.all.at(t-1).source.size())
+{
+if (AC!AssertedInference.all.at(t-1).source.at(k).name.content = AC!AssertedInference.all.at(i).target.first().name.content )
+{"yes".println();
+("Str_"+ t + " -> " +"Claim_"+(i+1+m) ).println();
+%]
+strategy_[%=t%] -> claim_[%=i+1+m%] 
+[%
+}
+else{"no".println();}
+k=k+1;
+}
+
+t=t-1;
+}
+
+size_ai=size_ai-1;
+
+i=i+1;
+
+}
+
+
+
+//THIRD step is to generated claims and evidences according to assertedEvidence
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//look at all the AssertedEvidence
+
+/*
+"???????????????????????".println();
+
+for (ai in AC!AssertedInference.all)
+{
+("inference "+ i).println();
+ai.target.first().name.content.println();
+ai.target.first().description.content.value.content.first().println();
+ai.reasoning.content.value.first().content.println();
+ai.source.first().name.content.println();
+ai.source.first().description.content.value.content.first().println();
+i=i+1;
+ai.source.first().type().println();
+ai.target.first().type().println();
+
+size_source_claim=ai.source.size();
+("size_source_claim: " + size_source_claim).println();
+var j=1;
+while(size_source_claim>1)
+{
+("source claim index: "+(j+1)).println;
+
+
+ai.source.at(j).name.content.println();
+ai.source.at(j).description.content.value.content.first().println();
+size_source_claim= size_source_claim-1;
+j=j+1;
+}
+" ".println();
+}
+
+
+*/
+
+("i="+i).println();
+("m="+m).println();
+for (ae in AC!AssertedEvidence)
+{
+var t: Integer;
+t=i;
+("AssertedEvidence "+ m).println();
+("claim_"+ (i+1+m) + " :" + ae.target.first().name.content).println();
+("claim_"+ (i+1+m) + "_content :" + ae.target.first().description.content.value.content.first()).println();
+
+%]
+
+claim_[%=i+1+m%] [shape=rect 
+label=< <FONT FACE="times bold">[%=ae.target.first().name.content%]</FONT> <br />  <FONT FACE="times">[%=ae.target.first().description.content.value.content.first().wrap(40)%]</FONT>> 
+width=4 
+height=1.7
+fixedsize=true]
+[%
+
+
+
+//4th step is to link the strategy to these claims that are generated througth AssertedEvidence
+//the key is to find the right claim for each strategy
+var found=-1;
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+//outer loop to search for each inference that has been processed
+//t is index of AssertedInference
+while(t>0 and found<0)
+{
+var k=0;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+//inner loop to search for eache source claim
+while(k< AC!AssertedInference.all.at(t-1).source.size() and found<0)
+{
+
+("AC!AssertedInference.all.at(t-1).source.size():" + AC!AssertedInference.all.at(t-1).source.size()).println();
+("AC!AssertedInference.all.at(t-1).source.at(k).name.content: "+ AC!AssertedInference.all.at(t-1).source.at(k).name.content).println();
+("AC!AssertedEvidence.all.at(m).target.first().name.content: "+ AC!AssertedEvidence.all.at(m).target.first().name.content).println();
+("k= " + k).println();
+("t-1= " + (t-1)).println();
+("m= " + m).println();
+if (AC!AssertedInference.all.at(t-1).source.at(k).name.content = AC!AssertedEvidence.all.at(m).target.first().name.content )
+
+{"yes, found in this AssertedInference".println();
+("Str_"+ t + " -> " +"Claim_"+(i+1+m) ).println();
+found=1;
+%]
+
+strategy_[%=t%] -> claim_[%=i+1+m%]
+[%
+("after found, t-1= " + (t-1)).println();
+}
+else{"not found in this AssertedInference; continue to search the ealier AssertedInference".println();}
+k=k+1;
+}
+
+t=t-1;
+}
+
+
+//5TH step is to generate evidence and link claim to evidence
+//I didn't define the content of solution, so the line below is not defined.
+//ae.source.first().description.content.value.content.first().println();
+size_source_vv=ae.source.size();
+("size_source_vv: " + size_source_vv).println();
+n=1;
+while(size_source_vv>0)
+{
+("source vv index: "+(n+1)).println;
+("Evidence_"+ (m+1)+"_"+n+": "+ ae.source.at(n-1).name.content).println();
+//i+1 is the number of target claims in AssertedInference, m is teh number of target claims of AssertedEvidence
+//!!!!!!!!!!!!!!!HERE WE ASSUME THAT ONE CLAIM IS MAPPING TO ONLY ONE AssertedInference OR ONE AssertedEvidence!!!!!!!!!!!!!!
+("Claim_"+(i+1+m) + " -> Evidence_"+ (m+1)+"_"+n ).println();
+
+%]
+
+evidence_[%=m+1%]_[%=n%][shape=circle
+label=< <FONT FACE="times bold"> Evidence </FONT> <br />  <FONT FACE="times"> [%=ae.source.at(n-1).name.content.wrap(20)%] </FONT>> 
+width=2.3
+fixedsize=true]
+
+claim_[%=i+1+m%] -> evidence_[%=m+1%]_[%=n%]
+[%
+
+
+//ae.source.at(j).description.content.value.content.first().println();
+size_source_vv=size_source_vv-1;
+n=n+1;
+}
+m=m+1;
+" ".println();
+
+}
+
+
+
+//6TH step:looking for undeveloped claims
+//////////////////////////////////////////////////////////////////////////////////////////
+//6.1: looking for undeveloped claims in Asserted Inference
+
+
+
+"//looking for undeveloped claims in Asserted Inference".println();
+
+
+
+//var size_claim: Integer;
+
+var number_of_undeveloped_claim=0;
+
+//size_claim=AC!Claim.all.size();
+//("size_claim: "+size_claim).println();
+
+for (cl in AC!Claim.all)
+{
+"".println();
+"START a new search".println();
+"".println();
+size_ai=AC!AssertedInference.all.size();
+("size_ai: "+size_ai).println();
+
+size_ae=AC!AssertedEvidence.all.size();
+("size_ae: "+size_ae).println();
+
+//found in ai =-1 means this claim is found in ai.target
+//i.e., this claim is developed
+//so if not found, set to 1, means undeveloped
+var found_in_ai=-1;
+var found_in_ae=-1;
+//x is index of AssertedInference
+var x=0;
+//y is index of AssertedEvidence
+var y=0;
+//search in AssertedInference.all.at(x).target
+while(size_ai>0 and found_in_ai=-1)
+{
+("x: " +x).println();
+("size_ai: " +size_ai).println();
+("in AI search, cl.name.content: "+cl.name.content).println();
+
+if(cl.name.content=AC!AssertedInference.all.at(x).target.first().name.content)
+{
+(cl.name.content+" is a developed claim with AssertedInference").println();
+found_in_ai=1;
+}
+else{
+"else,size_ai=size_ai-1 ".println();
+size_ai=size_ai-1;
+x=x+1;
+}
+}
+
+
+
+//6.2: search in AssertedEvidence.all.at(y).target
+while(size_ae>0 and found_in_ae=-1 and found_in_ai=-1)
+{
+("y: " +y).println();
+("size_ae: " +size_ae).println();
+("in AE search, cl.name.content: "+cl.name.content).println();
+if(cl.name.content=AC!AssertedEvidence.all.at(y).target.first().name.content)
+{
+(cl.name.content+" is a developed claim with AssertedEvidence").println();
+found_in_ae=1;
+}
+else{
+size_ae=size_ae-1;
+y=y+1;
+}
+}
+
+//6.3: to process the found undeveloped claim, and link strategy to these claims 
+if(found_in_ai=-1 and found_in_ae=-1)
+{
+
+size_ai=AC!AssertedInference.all.size();
+("size_ai: "+size_ai).println();
+
+size_ae=AC!AssertedEvidence.all.size();
+("size_ae: "+size_ae).println();
+
+
+(cl.name.content+" is an undeveloped claim").println();
+number_of_undeveloped_claim=number_of_undeveloped_claim+1;
+("claim_" + (i+m+1+number_of_undeveloped_claim)).println();
+
+%]
+
+claim_[%=i+m+1+number_of_undeveloped_claim%] [shape=rect 
+label=< <FONT FACE="times bold">[%=cl.name.content%]</FONT> <br />  <FONT FACE="times">[%=cl.description.content.value.content.first().wrap(40)%]</FONT>> 
+width=4 
+height=1.7
+fixedsize=true]
+[%
+//further search for the ae/ai of this claim.
+//ae/ai.source = claim
+
+
+//p is index of ai
+var p=0;
+var q=0;
+var ai_found=-1;
+for(ai in AC!AssertedInference.all)
+{
+while(q<ai.source.size() and ai_found=-1)
+{
+if(cl.name.content=ai.source.at(q).name.content)
+{
+("Str_"+ (p+1) + " -> " +"Claim_"+(i+m+1+number_of_undeveloped_claim) ).println();
+%]
+
+strategy_[%=p+1%] -> claim_[%=i+m+1+number_of_undeveloped_claim%]
+[%
+ai_found=1;
+}
+else
+{q=q+1; }
+}
+p=p+1;
+}
+}
+}%]
+}
+
+[%
+operation String wrap(wrap_len: Integer): String 
+{
+var i= (self.length()/wrap_len).asInteger();
+var j=self.length().mod(wrap_len);
+var strg: String;
+var len=self.length;
+
+if ((i=1 and j=0)or (i=0))
+{return self;}
+else if ((i=1 and j>0) or (i=2 and j=0))
+{
+return (self.subString(0, wrap_len)+ self.insertDash(1, wrap_len)+ "<br />" +  self.subString(wrap_len, len));
+}
+else if((i=2 and j>0) or (i=3 and j=0))
+{
+return (self.subString(0, wrap_len)+ self.insertDash(1, wrap_len)+ "<br />" +  self.subString(wrap_len, wrap_len*2)+ self.insertDash(2, wrap_len)+ "<br />" +  self.subString(wrap_len*2, len));
+}
+else if((i=3 and j>0) or (i=4 and j=0))
+{
+return (self.subString(0, wrap_len)+ self.insertDash(1, wrap_len)+ "<br />" +  self.subString(wrap_len, wrap_len*2)+ self.insertDash(2, wrap_len)+ "<br />" + self.subString(wrap_len*2, wrap_len*3)+ self.insertDash(3, wrap_len)+ "<br />" + self.subString(wrap_len*3, len));
+}
+else if((i=4 and j>0) or (i=5 and j=0))
+{
+return (self.subString(0, wrap_len)+ self.insertDash(1, wrap_len)+ "<br />" +  self.subString(wrap_len, wrap_len*2)+ self.insertDash(2, wrap_len)+ "<br />" + self.subString(wrap_len*2, wrap_len*3)+ self.insertDash(3, wrap_len)+ "<br />" + self.subString(wrap_len*3, wrap_len*4)+ self.insertDash(4, wrap_len)+ "<br />" +self.subString(wrap_len*4, len));
+}
+else if((i=5 and j>0) or (i=6 and j=0))
+{
+return (self.subString(0, wrap_len)+ self.insertDash(1, wrap_len)+ "<br />" +  self.subString(wrap_len, wrap_len*2)+ self.insertDash(2, wrap_len)+ "<br />" + self.subString(wrap_len*2, wrap_len*3)+ self.insertDash(3, wrap_len)+ "<br />" + self.subString(wrap_len*3, wrap_len*4)+ self.insertDash(4, wrap_len)+ "<br />" +  self.subString(wrap_len*4, wrap_len*5)+ self.insertDash(5, wrap_len)+ "<br />"+self.subString(wrap_len*5, len));
+}
+else if((i=6 and j>0) or (i=7 and j=0))
+{
+return (self.subString(0, wrap_len)+ self.insertDash(1, wrap_len)+ "<br />" +  self.subString(wrap_len, wrap_len*2)+ self.insertDash(2, wrap_len)+ "<br />" + self.subString(wrap_len*2, wrap_len*3)+ self.insertDash(3, wrap_len)+ "<br />" + self.subString(wrap_len*3, wrap_len*4)+ self.insertDash(4, wrap_len)+ "<br />" +  self.subString(wrap_len*4, wrap_len*5)+ self.insertDash(5, wrap_len)+ "<br />" +  self.subString(wrap_len*5, wrap_len*6)+ self.insertDash(6, wrap_len)+ "<br />"+self.subString(wrap_len*6, len));
+}
+else if((i=7 and j>0) or (i=8 and j=0))
+{
+return (self.subString(0, wrap_len)+ self.insertDash(1, wrap_len)+ "<br />" +  self.subString(wrap_len, wrap_len*2)+ self.insertDash(2, wrap_len)+ "<br />" + self.subString(wrap_len*2, wrap_len*3)+ self.insertDash(3, wrap_len)+ "<br />" + self.subString(wrap_len*3, wrap_len*4)+ self.insertDash(4, wrap_len)+ "<br />" +  self.subString(wrap_len*4, wrap_len*5)+ self.insertDash(5, wrap_len)+ "<br />" +  self.subString(wrap_len*5, wrap_len*6)+ self.insertDash(6, wrap_len)+ "<br />"+  self.subString(wrap_len*6, wrap_len*7)+ self.insertDash(7, wrap_len)+ "<br />" +self.subString(wrap_len*7, len));
+}
+}
+
+
+
+
+operation String insertDash(k1, k2: Integer): String{
+if (self.characterAt(k1*k2-1)=" " or (self.characterAt(k1*k2-1)!=" " and self.characterAt(k1*k2)=" ") or self.characterAt(k1*k2-1)="-" )
+{return null;}
+else return "-";
+
+}
+%]

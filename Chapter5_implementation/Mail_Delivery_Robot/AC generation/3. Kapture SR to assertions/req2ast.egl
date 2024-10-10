@@ -1,0 +1,417 @@
+[%
+
+//BASIC PARAMETER FETCH UP
+//must filter out the null instblk, otherwise the selection function in SlotT2/3/4 no valid, as there will be no item/children
+var instblk = req.e_data.e_template.c_instBlock.select(s|(s.a_isUsed="true" and s.e_item.children.size()>0));
+instblk.a_isUsed.println();
+var slotT2 =instblk.selectOne(s|s.e_item.children.second().a_slotId= "slotT2").e_item.children.second();
+("T2 " + slotT2.a_slotId).println();
+var slotT3 =instblk.selectOne(s|s.e_item.children.second().a_slotId= "slotT3").e_item.children.second();
+
+("T3 " + slotT3.a_slotId).println();
+var slotT4 =instblk.selectOne(s|s.e_item.children.second().a_slotId= "slotT4").e_item.children.second();
+
+("T4 " + slotT4.a_slotId).println();
+
+("target " + slotT3.children.second().text).println();
+slotT3.children.second().text.startsWith("prob_target_").println();
+
+var sizeOfSlotT4= slotT4.c_slotMember.size();
+
+//("size: " + sizeOfSlotT4).println();
+
+
+
+
+
+//*************************************************************************************************
+//START OF PRISM TEMPLATE WITHOUT CONSTANT SECTION
+//PROB TEMPLATE
+if(slotT3.children.second().text.startsWith("prob_target_"))
+{ 
+var prob_target = slotT3.children.second().text.substring("prob_target_".length);
+
+("prob_target: "+ prob_target).println();
+var pathFormula = slotT2.c_slotMember.selectOne(s|s.text.startsWith('pathFormula_')).text.substring("pathFormula_".length);
+("pathFormula: " + pathFormula).println();
+%]
+
+prob property P_[%=sr_index%]:
+	Prob[%=prob_target%] of [[%=pathFormula%]]
+[%} 
+
+
+
+
+
+
+//*************************************************************************************************
+//REWARD TEMPLATE
+else
+if(slotT3.children.second().text.startsWith("reward_target_"))
+{ 
+var reward_target = slotT3.children.second().text.substring("reward_target_".length);
+var reward_event = slotT4.c_slotMember.selectOne(s|s.text.startsWith('reward_event_')).text.substring("reward_event_".length);
+var reward_value = slotT4.c_slotMember.selectOne(s|s.text.startsWith('reward_value_')).text.substring("reward_value_".length);
+("reward_event: " + reward_event).println();
+("reward_value: " + reward_value).println();
+("reward_target: "+ reward_target).println();
+
+
+var rpathFormula = slotT2.c_slotMember.selectOne(s|s.text.startsWith('pathFormula_')).text.substring("pathFormula_".length);
+("rpathFormula: " + rpathFormula).println();
+%]
+rewards reward_[%=sr_index%] = 
+ [[%=reward_event%]] [%=reward_value%];
+endrewards
+
+prob property R_[%=sr_index%]:
+Reward {reward_[%=sr_index%]} [%=reward_target%] of 
+[[%=rpathFormula%]]
+
+[%}
+
+
+
+
+
+
+
+
+//*************************************************************************************************
+//START OF TEMPORAL TEMPLATE
+else if(slotT3.children.second().text.startsWith("NIL"))
+{ 
+
+var hasTemporalTerm: Boolean = false;
+var slotMemberT2;
+
+for (slotMemberT2 in slotT2.c_slotMember)
+{
+if (slotMemberT2.text.startsWith('term_') )
+{ hasTemporalTerm=true;}
+}
+
+
+if(hasTemporalTerm)
+{
+var temporalTerm= slotT2.c_slotMember.selectOne(s|s.text.startsWith('term_')).text.substring("term_".length);
+var pathFormula = slotT2.c_slotMember.selectOne(s|s.text.startsWith('pathFormula_')).text.substring("pathFormula_".length);
+
+("pathFormula: " + pathFormula).println();
+%]
+
+
+prob property T_[%=sr_index%]:
+[%=temporalTerm%] [[%=pathFormula%]]
+
+[%}}
+
+
+
+
+
+
+
+
+//*************************************************************************************************
+//CONSTANT SECTION BEGIN
+var hasConst: Boolean = false;
+var noOfCons: Integer = 0;
+var slotMember;
+
+for (slotMember in slotT4.c_slotMember)
+{
+if (sizeOfSlotT4>0 and ( slotMember.text.startsWith('constant_') or slotMember.text.startsWith('multi_constant_')))
+{ hasConst=true;
+  noOfCons=noOfCons+1;}
+}
+var i: Integer=1;
+if(hasConst)
+{ 
+//"ture".println();
+%]
+with constant
+[%
+for (slotMember in slotT4.c_slotMember)
+{
+if (slotMember.text.startsWith('constant_') and i< noOfCons)
+{
+//("constant: " + slotMember.text.substring("constant_".length)).println();
+%]
+[%=slotMember.text.substring("constant_".length)%],
+[%
+i=i+1;
+}
+
+else if (slotMember.text.startsWith('constant_') and i= noOfCons)
+{
+%]
+[%=slotMember.text.substring("constant_".length)%]
+[%
+}
+
+
+if (slotMember.text.startsWith('multi_constant_') and i< noOfCons)
+{
+var multi_constant_variable = slotMember.text.characterAt("multi_constant_".length);
+//("multi_constant_variable: " +multi_constant_variable).println();
+//("multi_constant: " + slotMember.text.substring("multi_constant_".length)).println();
+%]
+[%=slotMember.text.substring("multi_constant_".length)%],
+const [%=multi_constant_variable%] : core::nat
+
+[%
+i=i+1;}
+
+else if (slotMember.text.startsWith('multi_constant_') and i= noOfCons)
+{
+var multi_constant_variable = slotMember.text.characterAt("multi_constant_".length);
+//("multi_constant_variable: " +multi_constant_variable).println();
+//("multi_constant: " + slotMember.text.substring("multi_constant_".length)).println();
+%]
+[%=slotMember.text.substring("multi_constant_".length)%]
+const [%=multi_constant_variable%] : core::nat
+
+[%}
+
+
+}
+}
+//CONSTANT SECTION END
+
+
+
+
+
+
+
+
+
+
+
+//*************************************************************************************************
+//START OF FDR TEMPLATE
+else if (not (slotT3.children.second().text.startsWith("NIL") or slotT3.children.second().text.startsWith("reward_target_") or slotT3.children.second().text.startsWith("prob_target_")))
+
+ {
+
+
+
+//var gps = t_reqGroups.all.first().children.first();
+//var rq = gps.children.first().children.selectOne(l|l.tagName="records").children.selectOne(s|s.e_backwardsTr.text="SR1_1_1");
+// output: REQ-184.00
+
+//rq.a_id.println();
+// output: HL_SR_01
+//var spec: String;
+var event_1: String;
+var event_2 : String;
+var event_3 : String;
+
+//for spec1A, Spec1B, we need 2 events (AND) for guard condition, so event_4 is used for the 1st event. Thus codes for event123 stay untouch
+var event_4 : String;
+//spec=req.e_backwardsTr.text;
+//spec.println();
+
+
+//Step 2: identify the requirement template type.
+//identify the template of the requrirement
+var tmp = req.e_data.e_template;
+//output: while
+//tmp.a_name.println();
+
+if(tmp.a_name="while")
+{
+
+//2 instBlock are selected: choiceT4, chioceT2
+//instBlock with no slot members is filtered out by s.e_item.children.size()>0
+//instblk is a set
+//var instblk = tmp.c_instBlock.select(s|(s.a_isUsed="true" and s.e_item.children.size()>0));
+
+//for event 1
+//get slot
+//var slotT4 =instblk.selectOne(s|s.e_item.children.second().a_slotId= "slotT4").e_item.children.second();
+
+//get element of slot: signal-ref
+event_1=slotT4.children.second().text;
+//"333".println();
+event_1.println();
+//event_1=event_1.getBufferedName();
+
+if (slotT4.children.size()=5)
+{event_4 = slotT4.children.last().text;
+"444".println();
+event_4.println();
+"555".println();
+}
+//for event 2
+//get slot
+//var slotT3 =instblk.selectOne(s|s.e_item.children.second().a_slotId= "slotT3").e_item.children.second();
+
+//get element of slot: signal-ref
+event_2=slotT3.children.second().text;
+"222333".println();
+("event_2 " + event_2).println();
+
+
+event_3 = event_2.substring(0, event_2.indexOf("out")+3);
+event_3.println();
+}
+event_2.getBufferedName();
+"event_2.getBufferedName(): "+event_2.getBufferedName().println();
+%]
+
+
+
+--first selection of FDR template, if true branch = 2 guarded conditions
+--correspoding to FDR template 1.X, local invariant
+[%if (event_4.isDefined())
+{
+
+//2nd selection of FDR template, if true branch = buffer involved, template 1.1 and 1.2
+if (event_2.startsWith("buffered"))
+{%]
+untimed csp [%=sr_index%] csp-begin
+
+channel [%=event_2.getBufferedName()%] : core_real
+channel read : core_real
+
+BufferedOutput = (Buffer [| {|read|} |] Output) \{|read|}
+
+-- Output simply outputs what it reads.
+Output = read?x__ -> [%=event_2.cutBufferedPrefix().cutSuffix()%].out!x__ -> Output
+
+-- A buffer, whose current 'value' can be overwritten.
+Buffer = [%=event_2.getBufferedName()%]?x__ -> (read!x__ -> Buffer [] Buffer)
+
+[%=sr_index%] = (Behaviour [| {| [%=event_2.getBufferedName()%] |} |] BufferedOutput) \ {|[%=event_2.getBufferedName()%]|}
+
+Behaviour = CHAOS(Events) 
+		[| {|[%=event_1.cutBufferedPrefix()%]|} |> 
+		(ClosedLoop_ctrl /\  Behaviour)
+[%
+//3rd selection of FDR template, if true branch = value unspecified, template 1.2 
+if (event_2.endsWith("x__"))
+{%]
+ClosedLoop_ctrl = [%=event_4.cutBufferedPrefix()%] -> [%=event_2.getBufferedName()%]!x__ -> ClosedLoop_ctrl
+[%}
+
+//3rd selection of FDR template, else false branch = value specified, template 1.1 
+else {%]
+ClosedLoop_ctrl = [%=event_4.cutBufferedPrefix()%] -> [%=event_2.getBufferedName()%][%=event_2.substring(event_2.indexOf("out")+3)%] -> ClosedLoop_ctrl
+[%}%]
+csp-end
+
+untimed csp [%=sr_index%]_implement associated to [%= getModuleName()%] csp-begin 
+[%=sr_index%]_implement = [%=getModuleName()%]::O__(0) |\ {|[%=event_1.cutBufferedPrefix()%],[%=event_3.cutBufferedPrefix()%],[%=event_4.cutBufferedPrefix()%]|}				
+csp-end
+[%}
+
+//2nd selection of FDR template, else false branch = buffer not involved, template 1.3 and 1.4
+else{
+//not start with buffered
+%]
+
+untimed csp [%=sr_index%] csp-begin
+[%=sr_index%] = CHAOS(Events) [| {|[%=event_1.cutBufferedPrefix()%]|} |> (RUN({|[%=event_4.cutBufferedPrefix()%]|}) /\ [%=event_2.cutBufferedPrefix()%] -> [%=sr_index%])
+csp-end
+
+untimed csp [%=sr_index%]_implement associated to [%= getModuleName()%] csp-begin 
+[%=sr_index%]_implement = [%=getModuleName()%]::O__(0) |\ {|[%=event_1.cutBufferedPrefix()%],[%=event_3.cutBufferedPrefix()%],[%=event_4.cutBufferedPrefix()%]|}				
+csp-end
+
+
+[%}
+
+} 
+
+//first selection of FDR template, else false branch = only 1 guarded conditions
+//correspoding to FDR template 2.X, global invariant
+else{
+//else event_4 is not defined, currently only address spec 3
+//buffered or not is not considered
+%]
+
+untimed csp [%=sr_index%] csp-begin
+[%=sr_index%] = CHAOS(Events) [| {|[%=event_1%]|} |> (RUN({|[%=event_1%]|}) /\ [%=event_2%] -> [%=sr_index%])
+csp-end
+
+untimed csp [%=sr_index%]_implement associated to [%= getModuleName()%] csp-begin 
+[%=sr_index%]_implement = [%=getModuleName()%]::O__(0) |\ {|[%=event_1%],[%=event_3%]|}				
+csp-end
+
+[%}%]
+
+untimed assertion A_[%=sr_index%] : [%=sr_index%]_implement refines [%=sr_index%]  in the traces model
+
+
+[%}
+%]
+
+
+
+
+[%
+//for EVERY template generation
+if(tmp.a_name="every")
+{
+
+}
+%]
+
+
+
+
+
+
+[%
+operation String getBufferedName() :String{
+
+var buffered_event : String;
+
+if (self.startsWith("buffered"))
+{
+buffered_event= "buffered_"+self.substring(getModuleName().length()+("buffered_"+"::").length(), self.indexOf("."));
+("buffered_event: "+ buffered_event).println();
+return buffered_event;
+}
+//else {return self;}
+
+}
+%]
+[*
+This operation is to get the module name by taking the first element before the first ::
+[%
+operation String getModuleName() : String {
+var moduleName : String;
+moduleName = self.substring(0, self.indexOf("::"));
+return moduleName;
+}%]
+*]
+
+[*This operation is to get the module name by querying RoboChart models*]
+[%
+operation getModuleName() : String {
+var moduleName : String;
+for (md in X!RCModule.allInstances())
+{moduleName = md.name;}
+return moduleName;
+}
+
+operation String cutBufferedPrefix(): String{
+if(self.startsWith("buffered_"))
+{
+return self.substring(("buffered_").length());}
+else {return self;}
+}
+
+//to get only the core name of the event, e.g. mod_sys::int_ActualHV.out!x__ shall be changed to 
+//mod_sys::int_ActualHV
+//this core shall be used in different way as needed
+operation String cutSuffix(): String{
+return self.substring(0, self.indexOf("."));
+}
+%]
+
+

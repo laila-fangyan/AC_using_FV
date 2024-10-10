@@ -1,0 +1,18 @@
+//configuration
+//M = HVC_timed_useable SR only 2022.1.1 .xml
+
+
+
+rule Req2Assertion
+transform req : M!t_record {
+
+guard :  req.a_id.isDefined()
+parameters{
+
+var params : new Map;
+params.put("sr_index", req.e_backwardsTr.text);
+return params;}
+
+template : "req2ast2_add_timed_case_and_every_template.egl"
+target : "assertion_generation/" + req.e_backwardsTr.text + ".assertions"
+}

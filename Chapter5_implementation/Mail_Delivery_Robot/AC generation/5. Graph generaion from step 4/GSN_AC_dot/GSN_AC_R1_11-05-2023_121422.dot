@@ -1,0 +1,133 @@
+digraph assurance_case{
+
+claim_1 [shape=rect 
+label=< <FONT FACE="times bold">Claim for H1</FONT> <br />  <FONT FACE="times">Hazard H1 {Robot fails to deliver the ma-<br />ils} shall be avoided. </FONT>> 
+width=4 
+height=1.7
+fixedsize=true]
+
+strategy_1 [shape=parallelogram
+label=< <FONT FACE="times bold">Strategy</FONT> <br />  <FONT FACE="times">Strategy: Argument over identi-<br />fied causes. </FONT>> 
+width=4 height=1.0
+fixedsize=true]
+
+claim_1 -> strategy_1 
+
+claim_2 [shape=rect 
+label=< <FONT FACE="times bold">Claim for c1_1</FONT> <br />  <FONT FACE="times">Cause c1_1 {Robot runs out of power at t-<br />he non_charging position } shall be avoi-<br />ded. </FONT>> 
+width=4 
+height=1.7
+fixedsize=true]
+
+strategy_2 [shape=parallelogram
+label=< <FONT FACE="times bold">Strategy</FONT> <br />  <FONT FACE="times">Strategy: Argue over identifie-<br />d control measures.</FONT>> 
+width=4 height=1.0
+fixedsize=true]
+
+claim_2 -> strategy_2 
+strategy_1 -> claim_2 
+
+claim_3 [shape=rect 
+label=< <FONT FACE="times bold">Claim for SR1_1_1</FONT> <br />  <FONT FACE="times">Safety measure SR1_1_1 {the probability <br />for the robot to run out of power at eac-<br />h non_charging position shall be less th-<br />an 0.5 when batteryCapacity and chargeSt-<br />ep are 20 and 4 } shall be implemented. </FONT>> 
+width=4 
+height=1.7
+fixedsize=true]
+
+strategy_3 [shape=parallelogram
+label=< <FONT FACE="times bold">Strategy</FONT> <br />  <FONT FACE="times">Strategy: Argue over V & V.</FONT>> 
+width=4 height=1.0
+fixedsize=true]
+
+claim_3 -> strategy_3 
+strategy_2 -> claim_3 
+
+claim_4 [shape=rect 
+label=< <FONT FACE="times bold">Claim for SR1_1_2</FONT> <br />  <FONT FACE="times">Safety measure SR1_1_2 {Average number o-<br />f moves before running out of power shal-<br />l be larger than 8 when batteryCapacity <br />and chargeStep are 20 and 4 } shall be i-<br />mplemented. </FONT>> 
+width=4 
+height=1.7
+fixedsize=true]
+
+strategy_4 [shape=parallelogram
+label=< <FONT FACE="times bold">Strategy</FONT> <br />  <FONT FACE="times">Strategy: Argue over V & V.</FONT>> 
+width=4 height=1.0
+fixedsize=true]
+
+claim_4 -> strategy_4 
+strategy_2 -> claim_4 
+
+claim_5 [shape=rect 
+label=< <FONT FACE="times bold">Claim for SR1_1_3</FONT> <br />  <FONT FACE="times">Safety measure SR1_1_3 {There is a path <br />that the robot won't get stuck } shall b-<br />e implemented. </FONT>> 
+width=4 
+height=1.7
+fixedsize=true]
+
+strategy_5 [shape=parallelogram
+label=< <FONT FACE="times bold">Strategy</FONT> <br />  <FONT FACE="times">Strategy: Argue over V & V.</FONT>> 
+width=4 height=1.0
+fixedsize=true]
+
+claim_5 -> strategy_5 
+strategy_2 -> claim_5 
+
+claim_6 [shape=rect 
+label=< <FONT FACE="times bold">Claim for VR1_1_1_1</FONT> <br />  <FONT FACE="times">Safety measure shall be verified by {PRI-<br />SM model checking }</FONT>> 
+width=4 
+height=1.7
+fixedsize=true]
+
+strategy_3 -> claim_6
+
+evidence_1_1[shape=circle
+label=< <FONT FACE="times bold"> Evidence </FONT> <br />  <FONT FACE="times"> PRISM checking resul-<br />t for VR1_1_1_1 is "-<br />false" </FONT>> 
+width=2.3
+fixedsize=true]
+
+claim_6 -> evidence_1_1
+
+claim_7 [shape=rect 
+label=< <FONT FACE="times bold">Claim for VR1_1_1_2</FONT> <br />  <FONT FACE="times">Safety measure shall be verified by {PRI-<br />SM model checking }</FONT>> 
+width=4 
+height=1.7
+fixedsize=true]
+
+strategy_4 -> claim_7
+
+evidence_2_1[shape=circle
+label=< <FONT FACE="times bold"> Evidence </FONT> <br />  <FONT FACE="times"> PRISM checking resul-<br />t for VR1_1_1_2 is "-<br />true" </FONT>> 
+width=2.3
+fixedsize=true]
+
+claim_7 -> evidence_2_1
+
+claim_8 [shape=rect 
+label=< <FONT FACE="times bold">Claim for VR1_1_1_3</FONT> <br />  <FONT FACE="times">Safety measure shall be verified by {PRI-<br />SM model checking }</FONT>> 
+width=4 
+height=1.7
+fixedsize=true]
+
+strategy_5 -> claim_8
+
+evidence_3_1[shape=circle
+label=< <FONT FACE="times bold"> Evidence </FONT> <br />  <FONT FACE="times"> Evidence: PRISM mode-<br />l checking results 3 </FONT>> 
+width=2.3
+fixedsize=true]
+
+claim_8 -> evidence_3_1
+
+claim_9 [shape=rect 
+label=< <FONT FACE="times bold">Claim for c1_2</FONT> <br />  <FONT FACE="times">Cause c1_2 {Robot failure in hardware } <br />shall be avoided.</FONT>> 
+width=4 
+height=1.7
+fixedsize=true]
+
+strategy_1 -> claim_9
+
+claim_10 [shape=rect 
+label=< <FONT FACE="times bold">Claim for c1_3</FONT> <br />  <FONT FACE="times">Cause c1_3 {Robot failure in software } <br />shall be avoided.</FONT>> 
+width=4 
+height=1.7
+fixedsize=true]
+
+strategy_1 -> claim_10
+}
+

@@ -1,0 +1,11 @@
+rewards reward_SR1_1_2 = 
+ [deliverMOD::ctrl_ref0::stm_ref0::move.in] true:1;
+endrewards
+
+prob property R_SR1_1_2:
+Reward {reward_SR1_1_2} >8 of 
+[Reachable (deliverMOD::rp_ref0::c==0 /\ deliverMOD::ctrl_ref0::stm_ref1 is in deliverMOD::ctrl_ref0::stm_ref1:: batteryState)]
+
+with constant
+deliverMOD::rp_ref0::batteryCapacity set to 20,
+deliverMOD::rp_ref0::chargeStep set to 4

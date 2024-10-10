@@ -1,0 +1,94 @@
+//2021.7.5 model query of html report to create AC model of evidence 
+
+//this version assume that there is either timed or untimed assertions,
+//not possible to have both in the .asseritons
+//but can be extended to cover both
+
+//also assume that there is only one assertion 
+//but can be extended to cover multiple
+
+//source M= spec3_assertions.html
+//source X= HVC_Req_buffered.xml
+//source AC=SACM_AC.model
+
+//print 1. value can be 1 or 2
+M!t_table.all.size.println();
+
+//print 2, always 2, 1 for untimed, 1 for timed
+M!t_h2.all.size.println();
+
+//find the index of safety requirement from title in html
+//i.e., to identify which claim this assertion is about
+
+var ast_title : String;
+var sr_index : String;
+ast_title= M!t_title.all.first.text;
+ast_title.println();
+sr_index=ast_title.substring(ast_title.indexOf("assertions in")+("assertions in ").length(),ast_title.indexOf(".assertions"));
+("sr_index: " +sr_index).println();
+
+
+//find requirement which trace back to sr in hazardlog
+//through value of sr_index
+var req= X!t_record.all.selectOne(l|l.e_backwardsTr.text=sr_index);
+if(req.isDefined())
+{"defined".println();}
+else {"notdefined".println();}
+("req.tagName: "+ req.tagName).println();
+("req.a_id: " + req.a_id).println();
+
+//obtain verification ID through forwardsTr
+var v_claim_name: String;
+v_claim_name=req.e_forwardsTr.text;
+("v_claim_name: " +v_claim_name).println();
+
+
+//find the FDR result from the 4th colomn of table
+var result : String; 
+result=M!t_table.all.first().children.second().children.fourth().text;
+("result: "+result).println();
+
+//create evidence model(AritifactReference)
+var evidence= new AC!ArtifactReference;
+var name = new AC!LangString;
+evidence.name = name;
+evidence.name.content = "FDR checking result for " + v_claim_name + " is \"" + result+ "\"";
+
+
+
+//search assertedevidence relationship whose target is v_claim_name(get from kapture xml throught sr_index)
+//then delete its source relationship
+//add the newly created evidence (generated from html) to the relationship as source
+for (ae in AC!AssertedEvidence.allInstances().select(ae|ae.target.first().name.content="Claim for "+v_claim_name))
+{
+var old_evidence : String;
+old_evidence=ae.source.first().name.content;
+("old_evidence: " + old_evidence).println();
+
+
+
+for(ev in AC!ArtifactReference.allInstances().select(e|e.name.content=old_evidence))
+{
+if(ae.target.first().name.content="Claim for "+v_claim_name and ae.source.first()=ev)
+{
+//delete source relationship
+//this should be the 1st step
+ae.source.clear();
+//delete the old evidence
+//this must be the second step
+delete ev;
+}
+}
+//this must be the 3rd step
+ae.source.add(evidence);
+
+("ae.source: "+ae.source.first().name.content).println();
+}
+/*
+//print Assertion, States, Transitions,Result
+for (t in t_th.all())
+{t.text.println();
+if (t.text = "result")
+{}
+}
+*

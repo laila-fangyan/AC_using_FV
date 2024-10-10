@@ -1,0 +1,721 @@
+//configuration
+//T= mailrobot_emf_hazardlog.model
+//X= hazard analysis for Mail robot.xlsx
+
+var hazard;
+
+var cause;
+
+var subcause;
+
+var safetymeasure;
+
+var subsafetymeasure;
+
+var verification;
+
+var validation;
+
+var verificationevidence;
+
+var validationevidence;
+
+var hl= new T!HazardLog;
+
+
+     
+// here t is the row 
+//Mailrobot_hazardlog is the name of the spreadsheet
+for (t in X!Mailrobot_hazardlog.all)
+{
+     //t.println();
+     
+     //H1 -> C1-1 -> Sub cause ->  SM -> sub SM 
+     if(t.HazardId.isDefined())
+     {
+    
+     //create the hazard
+ 
+     hazard= t.createHazard();
+     
+     //create cause
+     if (t.CauseId.isDefined())
+     {
+     cause= t.createCause();
+     hazard.causes.add(cause);
+  
+      // cause defined, subcause not defined, subcause link to cause, 
+      //safety measure link to subcause, sub safety measure link to safety measure
+      if (t.SubCauseId.isDefined())
+     {
+    // ("L50" + t.SubCauseId.isDefined()).println();
+    //  ("L51" + t.SubCauseId).println();
+     subcause= t.createSubCause();
+     cause.causes.add(subcause);
+  
+     
+     
+     // create control measure within the if state of cause
+     if (t.SafetyMeasureId.isDefined())
+     {
+     safetymeasure= t.createSafetyMeasure();
+     subcause.controlMeasure.add(safetymeasure);
+  
+      if (t.SubSafetyMeasureId.isDefined() )
+     {
+     subsafetymeasure= t.createSubSafetyMeasure();
+     safetymeasure.controlMeasure.add(subsafetymeasure);
+     
+     
+     
+      // V & V link to subsafety measure
+      if  (t.VerificationId.isDefined())
+     {
+     verification = t.createVerification();
+     //"L74".println();
+     subsafetymeasure.verification.add(verification);
+                    
+      verificationevidence = t.createVerificationEvidence();
+      verification.evidence = verificationevidence;
+      }
+     
+     // create validation within the if state of safety measure
+      if  (t.ValidationId.isDefined())
+     {
+     validation = t.createValidation();
+     subsafetymeasure.validation.add(validation);
+          
+      validationevidence = t.createValidationEvidence();
+      validation.evidence = validationevidence;
+     }
+     }
+     
+      // SubSafety Measure not defined, V & V link to safety measure
+    else {
+      if  (t.VerificationId.isDefined())
+     {
+     verification = t.createVerification();
+    // "L97".println();
+     safetymeasure.verification.add(verification);
+                    
+      verificationevidence = t.createVerificationEvidence();
+      verification.evidence = verificationevidence;
+      }
+     
+     // create validation within the if state of safety measure
+      if  (t.ValidationId.isDefined())
+     {
+     validation = t.createValidation();
+     safetymeasure.validation.add(validation);
+          
+      validationevidence = t.createValidationEvidence();
+      validation.evidence = validationevidence;
+     }
+     }
+     }
+     }
+     
+       // cause defined, subcause not defined, safety measure link to cause
+     else  if (t.SafetyMeasureId.isDefined())
+     {
+     safetymeasure= t.createSafetyMeasure();
+     cause.controlMeasure.add(safetymeasure);
+  
+     
+       if (t.SubSafetyMeasureId.isDefined())
+     {
+     subsafetymeasure= t.createSubSafetyMeasure();
+     safetymeasure.controlMeasure.add(subsafetymeasure);
+     
+     
+     
+      // V & V link to subsafety measure
+      if  (t.VerificationId.isDefined())
+     {
+     verification = t.createVerification();
+     //"L135".println();
+     subsafetymeasure.verification.add(verification);
+                    
+      verificationevidence = t.createVerificationEvidence();
+      verification.evidence = verificationevidence;
+      }
+     
+     // create validation within the if state of safety measure
+      if  (t.ValidationId.isDefined())
+     {
+     validation = t.createValidation();
+     subsafetymeasure.validation.add(validation);
+          
+      validationevidence = t.createValidationEvidence();
+      validation.evidence = validationevidence;
+     }
+     }
+     
+         //SubSafety Measure not defined, V & V link to safety measure
+    else {
+      if  (t.VerificationId.isDefined())
+     {
+     verification = t.createVerification();
+    // "L158".println();
+     safetymeasure.verification.add(verification);
+                    
+      verificationevidence = t.createVerificationEvidence();
+      verification.evidence = verificationevidence;
+      }
+     
+     // create validation within the if state of safety measure
+      if  (t.ValidationId.isDefined())
+     {
+     validation = t.createValidation();
+     safetymeasure.validation.add(validation);
+          
+      validationevidence = t.createValidationEvidence();
+      validation.evidence = validationevidence;
+     }
+     }
+     
+     }
+     }
+        
+        
+     }
+     
+     
+         //no h in this row, only c and following   
+     else 
+     // for Hazard not defined, but cause is defined, e.g. C1-2
+     //repeat line 33-139
+   
+    if (t.CauseId.isDefined())
+     {
+     cause= t.createCause();
+     hazard.causes.add(cause);
+  
+      // cause defined, subcause not defined, subcause link to cause, 
+      //safety measure link to subcause, sub safety measure link to safety measure
+      if (t.SubCauseId.isDefined())
+     {
+     subcause= t.createSubCause();
+     cause.causes.add(subcause);
+  
+     
+     
+     // create control measure within the if state of cause
+     if (t.SafetyMeasureId.isDefined())
+     {
+     safetymeasure= t.createSafetyMeasure();
+     subcause.controlMeasure.add(safetymeasure);
+  
+      if (t.SubSafetyMeasureId.isDefined() )
+     {
+     subsafetymeasure= t.createSubSafetyMeasure();
+     safetymeasure.controlMeasure.add(subsafetymeasure);
+     
+     
+     
+      // V & V link to subsafety measure
+      if  (t.VerificationId.isDefined())
+     {
+     verification = t.createVerification();
+    // "L217".println();
+     subsafetymeasure.verification.add(verification);
+                    
+      verificationevidence = t.createVerificationEvidence();
+      verification.evidence = verificationevidence;
+      }
+     
+     // create validation within the if state of safety measure
+      if  (t.ValidationId.isDefined())
+     {
+     validation = t.createValidation();
+     subsafetymeasure.validation.add(validation);
+          
+      validationevidence = t.createValidationEvidence();
+      validation.evidence = validationevidence;
+     }
+     }
+     
+      // SubSafety Measure not defined, V & V link to safety measure
+    else {
+      if  (t.VerificationId.isDefined())
+     {
+     verification = t.createVerification();
+     //"L240".println();
+     safetymeasure.verification.add(verification);
+                   
+      verificationevidence = t.createVerificationEvidence();
+      verification.evidence = verificationevidence;
+       }
+     
+     // create validation within the if state of safety measure
+      if  (t.ValidationId.isDefined())
+     {
+     validation = t.createValidation();
+     safetymeasure.validation.add(validation);
+          
+      validationevidence = t.createValidationEvidence();
+      validation.evidence = validationevidence;
+     }
+     }
+     }
+     }
+     
+       // cause defined, subcause not defined, safety measure link to cause
+     else  if (t.SafetyMeasureId.isDefined())
+     {
+     safetymeasure= t.createSafetyMeasure();
+     cause.controlMeasure.add(safetymeasure);
+  
+     
+       if (t.SubSafetyMeasureId.isDefined())
+     {
+     subsafetymeasure= t.createSubSafetyMeasure();
+     safetymeasure.controlMeasure.add(subsafetymeasure);
+     
+     
+     
+      // V & V link to subsafety measure
+      if  (t.VerificationId.isDefined())
+     {
+     verification = t.createVerification();
+    // "L278".println();
+     subsafetymeasure.verification.add(verification);
+                   
+      verificationevidence = t.createVerificationEvidence();
+      verification.evidence = verificationevidence;
+       }
+     
+     // create validation within the if state of safety measure
+      if  (t.ValidationId.isDefined())
+     {
+     validation = t.createValidation();
+     subsafetymeasure.validation.add(validation);
+          
+      validationevidence = t.createValidationEvidence();
+      validation.evidence = validationevidence;
+     }
+     }
+     
+         //SubSafety Measure not defined, V & V link to safety measure
+    else {
+      if  (t.VerificationId.isDefined())
+     {
+     verification = t.createVerification();
+   // "L301".println();
+     safetymeasure.verification.add(verification);
+                    
+      verificationevidence = t.createVerificationEvidence();
+      verification.evidence = verificationevidence;
+      }
+     
+     // create validation within the if state of safety measure
+      if  (t.ValidationId.isDefined())
+     {
+     validation = t.createValidation();
+     safetymeasure.validation.add(validation);
+          
+      validationevidence = t.createValidationEvidence();
+      validation.evidence = validationevidence;
+     }
+     }
+     
+     }
+     }
+    
+     
+     
+     
+         //no h,c in this row, only subc and following   
+     else 
+     ////for hazard not defined, cause is not defined in this line, but subcasue is defined,
+     //repeat line 40-91
+     
+      if (t.SubCauseId.isDefined())
+     {
+     subcause= t.createSubCause();
+     cause.causes.add(subcause);
+  
+     
+     
+     // create control measure within the if state of cause
+     if (t.SafetyMeasureId.isDefined())
+     {
+     safetymeasure= t.createSafetyMeasure();
+     subcause.controlMeasure.add(safetymeasure);
+  
+      if (t.SubSafetyMeasureId.isDefined())
+     {
+     subsafetymeasure= t.createSubSafetyMeasure();
+     safetymeasure.controlMeasure.add(subsafetymeasure);
+     
+     
+     
+      // V & V link to subsafety measure
+      if  (t.VerificationId.isDefined())
+     {
+     verification = t.createVerification();
+    //"L354".println();
+     subsafetymeasure.verification.add(verification);
+                    
+      verificationevidence = t.createVerificationEvidence();
+      verification.evidence = verificationevidence;
+      }
+     
+     // create validation within the if state of safety measure
+      if  (t.ValidationId.isDefined())
+     {
+     validation = t.createValidation();
+     subsafetymeasure.validation.add(validation);
+          
+      validationevidence = t.createValidationEvidence();
+      validation.evidence = validationevidence;
+     }
+     }
+     
+      // SubSafety Measure not defined, V & V link to safety measure
+    else {
+      if  (t.VerificationId.isDefined())
+     {
+     verification = t.createVerification();
+    // "L377".println();
+     safetymeasure.verification.add(verification);
+                    
+      verificationevidence = t.createVerificationEvidence();
+      verification.evidence = verificationevidence;
+      }
+     
+     // create validation within the if state of safety measure
+      if  (t.ValidationId.isDefined())
+     {
+     validation = t.createValidation();
+     safetymeasure.validation.add(validation);
+          
+      validationevidence = t.createValidationEvidence();
+      validation.evidence = validationevidence;
+     }
+     }
+     }
+     }
+     
+
+     
+     
+     
+       //no h,c,subc in this row, only sr and following    
+     else 
+     //for the row where hazard not defined, cause and subcause is not defined, but safety measure is defined, e.g. M1-1-2
+     //repeat line 48-90, but add two branches as cause and subcause both defined, or only cause  defined
+  if (t.SafetyMeasureId.isDefined())
+     {
+     //cause and subcause both defined, safety measure link to subcasue
+     if(cause.isDefined() and cause.causes.notEmpty())
+     // the if above should not use "cause.causes.isDefined()" to judge if the subcause is defined
+     // if there is no subcasue, cause.causes.isDefined()=Ture, but it's an empty set. cause.causes.notEmpty()=false
+     //instead, cause.causes.isDefined() should be used
+     
+     {
+  //   cause.causes.isDefined().println();
+  //    cause.causes.println();
+   //     cause.causes.notEmpty().println();
+    // cause.causes.isEmpty().println();
+     
+     safetymeasure= t.createSafetyMeasure();
+     subcause.controMeasure.add(safetymeasure);
+  
+      if (t.SubSafetyMeasureId.isDefined())
+     {
+     
+     subsafetymeasure= t.createSubSafetyMeasure();
+     safetymeasure.controlMeasure.add(subsafetymeasure);
+     
+      // V & V link to subsafety measure
+      if  (t.VerificationId.isDefined())
+     {
+     verification = t.createVerification();
+     //"L432".println();
+     subsafetymeasure.verification.add(verification);
+                    
+      verificationevidence = t.createVerificationEvidence();
+      verification.evidence = verificationevidence;
+      }
+     
+     // create validation within the if state of safety measure
+      if  (t.ValidationId.isDefined())
+     {
+     validation = t.createValidation();
+     subsafetymeasure.validation.add(validation);
+          
+      validationevidence = t.createValidationEvidence();
+      validation.evidence = validationevidence;
+     }
+     }
+     
+      // SubSafety Measure not defined, V & V link to safety measure
+    else {
+      if  (t.VerificationId.isDefined())
+     {
+
+     verification = t.createVerification();
+    // "L456".println();
+     safetymeasure.verification.add(verification);
+                    
+      verificationevidence = t.createVerificationEvidence();
+      verification.evidence = verificationevidence;
+      }
+     
+     // create validation within the if state of safety measure
+      if  (t.ValidationId.isDefined())
+     {
+     validation = t.createValidation();
+     safetymeasure.validation.add(validation);
+               
+      validationevidence = t.createValidationEvidence();
+      validation.evidence = validationevidence;
+     }
+     }
+     }
+     
+     // cause is defined, not sub cause defined, safety measure link to cause
+     else if(cause.isDefined())
+     {
+      safetymeasure= t.createSafetyMeasure();
+     cause.controlMeasure.add(safetymeasure);
+  
+      if (t.SubSafetyMeasureId.isDefined())
+     {
+     subsafetymeasure= t.createSubSafetyMeasure();
+     safetymeasure.controlMeasure.add(subsafetymeasure);
+     
+     
+     
+      // V & V link to subsafety measure
+      if  (t.VerificationId.isDefined())
+     {
+     verification = t.createVerification();
+     //"L491".println();
+     subsafetymeasure.verification.add(verification);
+                    
+      verificationevidence = t.createVerificationEvidence();
+      verification.evidence = verificationevidence;
+      }
+     
+     // create validation within the if state of safety measure
+      if  (t.ValidationId.isDefined())
+     {
+     validation = t.createValidation();
+     subsafetymeasure.validation.add(validation);
+     
+          
+      validationevidence = t.createValidationEvidence();
+      validation.evidence = validationevidence;
+     }
+     }
+     
+      // SubSafety Measure not defined, V & V link to safety measure
+    else {
+      if  (t.VerificationId.isDefined())
+     {
+     verification = t.createVerification();
+     //"L515".println();
+     safetymeasure.verification.add(verification);
+               
+      verificationevidence = t.createVerificationEvidence();
+      verification.evidence = verificationevidence;
+            }
+     
+     // create validation within the if state of safety measure
+      if  (t.ValidationId.isDefined())
+     {
+     validation = t.createValidation();
+     safetymeasure.validation.add(validation);
+          
+      validationevidence = t.createValidationEvidence();
+      validation.evidence = validationevidence;
+     }
+     }
+     }
+     
+     }
+     
+     
+     //no h,c,subc,sr in this row, only subsr
+     else 
+     // for the row where hazard not defined, cause is not defined,safety measure is not defined, but sub safety measure is defined
+    // one branches: sub safety measure link to safety measure
+    // repeat line
+     if (t.SubSafetyMeasureId.isDefined())
+     {
+     subsafetymeasure= t.createSubSafetyMeasure();
+     safetymeasure.controlMeasure.add(subsafetymeasure);
+     
+     
+     
+      // V & V link to subsafety measure
+      if  (t.VerificationId.isDefined())
+     {
+     verification = t.createVerification();
+     //"L553".println();
+     subsafetymeasure.verification.add(verification);
+               
+      verificationevidence = t.createVerificationEvidence();
+      verification.evidence = verificationevidence;
+      }
+     
+     // create validation within the if state of safety measure
+      if  (t.ValidationId.isDefined())
+     {
+     validation = t.createValidation();
+     subsafetymeasure.validation.add(validation);
+          
+      validationevidence = t.createValidationEvidence();
+      validation.evidence = validationevidence;
+     }
+     }
+     
+     
+     
+     
+     
+     //no h,c,subc,sr,subsr in this row, only v and v
+     else
+        /* 
+        // two branches: both safety measure and sub SM are defined, V&V link to sub, or only safety measure defined, V&V link to safety measure
+        "safaewfe".println();
+       "1".println();
+        safetymeasure.isDefined().println();
+        "2".println();
+       // safetymeasure.notEmpty().println();
+        "3".println();
+        safetymeasure.println();
+        "4".println();
+        safetymeasure.controlMeasure.isDefined().println();
+         "5".println();
+         safetymeasure.controlMeasure.notEmpty().println();
+         "6".println();
+         safetymeasure.controlMeasure.println();
+*/
+         
+    {
+    if (safetymeasure.isDefined() and safetymeasure.controlMeasure.notEmpty())
+     {
+     if(t.VerificationId.isDefined())
+     {
+   // "ddd".println();
+     verification = t.createVerification();
+    // "L599".println();
+     subsafetymeasure.verification.add(verification);
+               
+      verificationevidence = t.createVerificationEvidence();
+      verification.evidence = verificationevidence;
+     }
+    
+    // for hazard not defined, cause is not defined,safety measure is not defined, but validation is defined, e.g. V1-1-1-1-2 
+      if  (t.ValidationId.isDefined())
+     {
+     //"fff".println();
+       validation = t.createValidation();
+     subsafetymeasure.validation.add(validation);
+     
+      validationevidence = t.createValidationEvidence();
+      validation.evidence = validationevidence;
+     }
+     }
+     //there is 1st level SR, no 2nd level SR
+     else if (safetymeasure.isDefined())
+     {
+     if(t.VerificationId.isDefined())
+     {
+    // "ggg".println();
+     verification = t.createVerification();
+     //"L624".println();
+     safetymeasure.verification.add(verification);
+          
+      verificationevidence = t.createVerificationEvidence();
+      verification.evidence = verificationevidence;
+     }
+    
+    
+      if  (t.ValidationId.isDefined())
+     {"hhh".println();
+       validation = t.createValidation();
+    safetymeasure.validation.add(validation);
+     
+      validationevidence = t.createValidationEvidence();
+      validation.evidence = validationevidence;
+     }
+     }
+      }    
+     
+     hl.hazards.add(hazard);
+     hazard.causes.println();
+     }
+     
+operation X!Mailrobot_hazardlog createHazard() : T!HazardousSituation{
+ var h = new T!HazardousSituation;
+     h.number = self.HazardId;
+     h.description = self.HazardDescription;
+     return h;
+}
+
+operation X!Mailrobot_hazardlog createCause(): T!Cause{
+  var c = new T!Cause;
+     c.number = self.CauseId;
+     c.description = self.CauseDescription;
+    // h.causes.add(c);
+     return c;
+   }
+   
+operation X!Mailrobot_hazardlog createSubCause(): T!Cause{
+  var c = new T!Cause;
+     c.number = self.SubCauseId;
+     c.description = self.SubCauseDescription;
+        return c;
+   }
+
+operation X!Mailrobot_hazardlog createSafetyMeasure(): T!ControlMeasure{
+  var m = new T!ControlMeasure;
+     m.number = self.SafetyMeasureId;
+     m.description = self.SafetyMeasureDescription;
+     return m;
+   }
+
+operation X!Mailrobot_hazardlog createSubSafetyMeasure(): T!ControlMeasure{
+  var m = new T!ControlMeasure;
+     m.number = self.SubSafetyMeasureId;
+     m.description = self.SubSafetyMeasureDescription;
+     return m;
+   }
+
+//the createVerification generates only verification method (claim) ,not evidence of the verificaiton (solution/evidence)
+operation X!Mailrobot_hazardlog createVerification(): T!Verification{
+var vr = new T!Verification;
+     vr.number = self.VerificationId;
+     vr.description = self.VerificationDescription;
+     return vr;
+}
+
+operation X!Mailrobot_hazardlog  createVerificationEvidence(): T!Evidence{
+var vrev = new T!Evidence;
+    vrev.description = self.VerificationEvidence;
+return vrev;
+ //vrev==verification evidence
+     }  
+
+
+//the createValidation generates only validation method (claim) not evidence of the validation (solution/evidence)
+operation X!Mailrobot_hazardlog createValidation(): T!Validation{
+var vl = new T!Validation;
+     vl.number = self.ValidationId;
+     vl.description = self.ValidationDescription;
+     return vl;
+
+     }
+     
+     
+operation X!Mailrobot_hazardlog  createValidationEvidence(): T!Evidence{
+var vlev = new T!Evidence;
+    vlev.description = self.ValidationEvidence;
+return vlev;
+ //vlev==validation evidence
+     }  
+    

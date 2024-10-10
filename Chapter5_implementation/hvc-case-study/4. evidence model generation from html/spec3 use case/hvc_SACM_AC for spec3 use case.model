@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:argumentation_="http://omg.sacm/2.0/argumentation">
+  <argumentation_:ArgumentPackage/>
+  <argumentation_:Claim>
+    <name lang="English" content="Claim for H1"/>
+    <description>
+      <content>
+        <value lang="English" content="Hazard H1 {Fire in the painting cell} shall be avoided."/>
+      </content>
+    </description>
+  </argumentation_:Claim>
+  <argumentation_:AssertedInference source="/4" target="/1" reasoning="/3"/>
+  <argumentation_:ArgumentReasoning>
+    <content>
+      <value lang="English" content="Strategy: Argument over identified causes."/>
+    </content>
+  </argumentation_:ArgumentReasoning>
+  <argumentation_:Claim>
+    <name lang="English" content="Claim for C1"/>
+    <description>
+      <content>
+        <value lang="English" content="Cause C1 {discharge sparks causing ignition due to high voltage output } shall be avoided."/>
+      </content>
+    </description>
+  </argumentation_:Claim>
+  <argumentation_:AssertedInference source="/7 /19 /31 /42" target="/4" reasoning="/6"/>
+  <argumentation_:ArgumentReasoning>
+    <content>
+      <value lang="English" content="Strategy: Argument over identified subcauses."/>
+    </content>
+  </argumentation_:ArgumentReasoning>
+  <argumentation_:Claim>
+    <name lang="English" content="Claim for C1_1"/>
+    <description>
+      <content>
+        <value lang="English" content="Cause C1_1 {HVC board did not respond to any  set_point changes, and had a constant actual value } shall be avoided."/>
+      </content>
+    </description>
+  </argumentation_:Claim>
+  <argumentation_:AssertedInference source="/10" target="/7" reasoning="/9"/>
+  <argumentation_:ArgumentReasoning>
+    <content>
+      <value lang="English" content="Strategy: Argue over identified control measures."/>
+    </content>
+  </argumentation_:ArgumentReasoning>
+  <argumentation_:Claim>
+    <name lang="English" content="Claim for SR1_1_1"/>
+    <description>
+      <content>
+        <value lang="English" content="Safety measure SR1_1_1 {the actual system voltage shall always follows the set-point in normal operation &#xA;(P1, Spec1A) } shall be implemented."/>
+      </content>
+    </description>
+  </argumentation_:Claim>
+  <argumentation_:AssertedInference source="/13 /16" target="/10" reasoning="/12"/>
+  <argumentation_:ArgumentReasoning>
+    <content>
+      <value lang="English" content="Strategy: Argue over V &amp; V."/>
+    </content>
+  </argumentation_:ArgumentReasoning>
+  <argumentation_:Claim>
+    <name lang="English" content="Claim for VR1_1_1_1"/>
+    <description>
+      <content>
+        <value lang="English" content="Safety measure shall be verified by {FDR refinement checking }"/>
+      </content>
+    </description>
+  </argumentation_:Claim>
+  <argumentation_:AssertedEvidence source="/15" target="/13"/>
+  <argumentation_:ArtifactReference>
+    <name lang="English" content="Evidence: FDR result and reference"/>
+  </argumentation_:ArtifactReference>
+  <argumentation_:Claim>
+    <name lang="English" content="Claim for VA1_1_1_1"/>
+    <description>
+      <content>
+        <value lang="English" content="Safety measure shall be validated by {state reachability }"/>
+      </content>
+    </description>
+  </argumentation_:Claim>
+  <argumentation_:AssertedEvidence source="/18" target="/16"/>
+  <argumentation_:ArtifactReference>
+    <name lang="English" content="Evidence: FDR result and reference"/>
+  </argumentation_:ArtifactReference>
+  <argumentation_:Claim>
+    <name lang="English" content="Claim for C1_2"/>
+    <description>
+      <content>
+        <value lang="English" content="Cause C1_2 {set_point is not set, but HV_Actual had a non_zero value } shall be avoided."/>
+      </content>
+    </description>
+  </argumentation_:Claim>
+  <argumentation_:AssertedInference source="/22" target="/19" reasoning="/21"/>
+  <argumentation_:ArgumentReasoning>
+    <content>
+      <value lang="English" content="Strategy: Argue over identified control measures."/>
+    </content>
+  </argumentation_:ArgumentReasoning>
+  <argumentation_:Claim>
+    <name lang="English" content="Claim for SR1_2_1"/>
+    <description>
+      <content>
+        <value lang="English" content="Safety measure SR1_2_1 {the actual system voltage shall be zero if set-point is not set  in error mode (P1, Spec1B) } shall be implemented."/>
+      </content>
+    </description>
+  </argumentation_:Claim>
+  <argumentation_:AssertedInference source="/25 /28" target="/22" reasoning="/24"/>
+  <argumentation_:ArgumentReasoning>
+    <content>
+      <value lang="English" content="Strategy: Argue over V &amp; V."/>
+    </content>
+  </argumentation_:ArgumentReasoning>
+  <argumentation_:Claim>
+    <name lang="English" content="Claim for VR1_2_1_1"/>
+    <description>
+      <content>
+        <value lang="English" content="Safety measure shall be verified by {FDR refinement checking }"/>
+      </content>
+    </description>
+  </argumentation_:Claim>
+  <argumentation_:AssertedEvidence source="/27" target="/25"/>
+  <argumentation_:ArtifactReference>
+    <name lang="English" content="Evidence: FDR result and reference"/>
+  </argumentation_:ArtifactReference>
+  <argumentation_:Claim>
+    <name lang="English" content="Claim for VA1_2_1_1"/>
+    <description>
+      <content>
+        <value lang="English" content="Safety measure shall be validated by {state reachability }"/>
+      </content>
+    </description>
+  </argumentation_:Claim>
+  <argumentation_:AssertedEvidence source="/30" target="/28"/>
+  <argumentation_:ArtifactReference>
+    <name lang="English" content="Evidence: FDR result and reference"/>
+  </argumentation_:ArtifactReference>
+  <argumentation_:Claim>
+    <name lang="English" content="Claim for C1_3"/>
+    <description>
+      <content>
+        <value lang="English" content="Cause C1_3 {HV_SetPoint is not disabled causing HVC to continue to set out high voltage when 24v power fails. } shall be avoided."/>
+      </content>
+    </description>
+  </argumentation_:Claim>
+  <argumentation_:AssertedInference source="/34" target="/31" reasoning="/33"/>
+  <argumentation_:ArgumentReasoning>
+    <content>
+      <value lang="English" content="Strategy: Argue over identified control measures."/>
+    </content>
+  </argumentation_:ArgumentReasoning>
+  <argumentation_:Claim>
+    <name lang="English" content="Claim for spec3"/>
+    <description>
+      <content>
+        <value lang="English" content="Safety measure spec3 {HV_SetPoint shall be set to 0 when the 24V power signal is switched off &#xA;(P3, Spec3) } shall be implemented."/>
+      </content>
+    </description>
+  </argumentation_:Claim>
+  <argumentation_:AssertedInference source="/37 /39" target="/34" reasoning="/36"/>
+  <argumentation_:ArgumentReasoning>
+    <content>
+      <value lang="English" content="Strategy: Argue over V &amp; V."/>
+    </content>
+  </argumentation_:ArgumentReasoning>
+  <argumentation_:Claim>
+    <name lang="English" content="Claim for VR1_3_1_1"/>
+    <description>
+      <content>
+        <value lang="English" content="Safety measure shall be verified by {FDR refinement checking }"/>
+      </content>
+    </description>
+  </argumentation_:Claim>
+  <argumentation_:AssertedEvidence source="/43" target="/37"/>
+  <argumentation_:Claim>
+    <name lang="English" content="Claim for VA1_3_1_1"/>
+    <description>
+      <content>
+        <value lang="English" content="Safety measure shall be validated by {state reachability }"/>
+      </content>
+    </description>
+  </argumentation_:Claim>
+  <argumentation_:AssertedEvidence source="/41" target="/39"/>
+  <argumentation_:ArtifactReference>
+    <name lang="English" content="Evidence: FDR result and reference"/>
+  </argumentation_:ArtifactReference>
+  <argumentation_:Claim>
+    <name lang="English" content="Claim for C1_4"/>
+    <description>
+      <content>
+        <value lang="English" content="Cause C1_4 {HVC limit supervision fails } shall be avoided."/>
+      </content>
+    </description>
+  </argumentation_:Claim>
+  <argumentation_:ArtifactReference>
+    <name content="FDR checking result for VR1_3_1_1 is &quot;true&quot;"/>
+  </argumentation_:ArtifactReference>
+</xmi:XMI>

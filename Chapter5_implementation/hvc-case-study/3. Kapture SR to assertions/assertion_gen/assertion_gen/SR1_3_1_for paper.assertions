@@ -1,0 +1,11 @@
+untimed csp SR1_2_1 csp-begin
+SR1_3_1 = CHAOS(Events) [| {|mod_sys::ext_pow24VStatus.in.Power_Off|} |> (RUN({|mod_sys::ext_pow24VStatus.in.Power_Off|}) /\ mod_sys::ext_setPoint.out.0 -> SR1_3_1)
+csp-end
+
+untimed csp SR1_2_1_implement associated to mod_sys csp-begin 
+SR1_3_1_implement = mod_sys::O__(0) |\ {|mod_sys::ext_pow24VStatus.in.Power_Off,mod_sys::ext_setPoint.out|}				
+csp-end
+
+untimed assertion A_SR1_2_1 : SR1_2_1_implement refines SR1_2_1  in the traces model
+
+

@@ -1,0 +1,53 @@
+timed csp SR1_1_1 csp-begin
+Timed(OneStep) {
+SR1_1_1= timed_priority(Process_1)
+
+Process_1= 
+mod_sys::int_dutyCyclePWM1.out.0 -> Process_1
+[]
+mod_sys::int_dutyCyclePWM1.out?x:{x | x <- duty, x > 0} -> Process_2
+[]
+mod_sys::ext_pow24VStatus.in.Power_Off -> Process_1
+
+Process_2 = 
+mod_sys::int_dutyCyclePWM1.out.0 -> Process_1
+[]
+mod_sys::int_dutyCyclePWM1.out?x:{x | x <- duty, x > 0} -> Process_2
+[]
+mod_sys::ext_pow24VStatus.in.Power_Off -> TRUN {|mod_sys::ext_pow24VStatus.in.Power_Off, mod_sys::int_dutyCyclePWM1.out|} /\ (WAIT(ms(10))); USTOP [|{|mod_sys::int_dutyCyclePWM1.out.0|} |> SKIP; Process_1
+}
+csp-end
+
+timed csp SR1_1_1_implement associated to mod_sys csp-begin
+Timed(OneStep){ 
+SR1_1_1_implement =
+timed_priority(
+mod_sys::O__(0, ms(10), 1) 
+|\ {| mod_sys::ext_pow24VStatus.in.Power_Off, mod_sys::int_dutyCyclePWM1.out, tock|}) 
+} 
+csp-end 
+
+timed assertion A_SR1_1_1 : SR1_1_1_implement refines SR1_1_1  in the traces model
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

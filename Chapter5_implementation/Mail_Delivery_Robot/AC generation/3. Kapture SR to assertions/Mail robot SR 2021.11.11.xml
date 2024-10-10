@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<report id="D-RisQ/UC/SRS">
+   <reqGroups>
+      <groups>
+         <group groupId="REQ.1">
+            <title>MAIL ROBOT</title>
+            <records>
+               <record id="REQ-197.00">
+                  <title>OK_Ex3_Prob_run_out_of_power_path_formula</title>
+                  <status>NO_ERRORS</status>
+                  <data>
+                     <template name="while" format="" type="REQUIREMENT">
+                        <instBlock isUsed="false"/>
+                        <instBlock isUsed="true">
+                           <item/>
+                        </instBlock>
+                        <instBlock isUsed="false"/>
+                        <instBlock isUsed="true">
+                           <item>
+                              <slot slotId="choiceT4">
+                                 <slotMember class="choice">is true</slotMember>
+                              </slot>
+                              <slot slotId="slotT4">
+                                 <slotMember class="keyword">signal </slotMember>
+                                 <slotMember class="signal-ref">constant_deliverMOD::rp_ref0::batteryCapacity set to 20</slotMember>
+                                 <slotMember class="op topOp"> and </slotMember>
+                                 <slotMember class="keyword">signal </slotMember>
+                                 <slotMember class="signal-ref">constant_deliverMOD::rp_ref0::chargeStep set to 4</slotMember>
+                                 <slotMember class="op topOp"> and </slotMember>
+                                 <slotMember class="keyword">signal </slotMember>
+                                 <slotMember class="signal-ref">multi_constant_x from set  {1 to 8}</slotMember>
+                              </slot>
+                           </item>
+                        </instBlock>
+                        <instBlock isUsed="true">
+                           <item>
+                              <slot slotId="choiceT1">
+                                 <slotMember class="choice">becomes true</slotMember>
+                              </slot>
+                              <slot slotId="slotT2">
+                                 <slotMember class="keyword">signal </slotMember>
+                                 <slotMember class="signal-ref">pathFormula_Finally deliverMOD::rp_ref0::p==x /\ deliverMOD::rp_ref0::c==0</slotMember>
+                              </slot>
+                           </item>
+                        </instBlock>
+                        <instBlock isUsed="true">
+                           <item>
+                              <slot slotId="choiceT2">
+                                 <slotMember class="choice">be true</slotMember>
+                              </slot>
+                              <slot slotId="slotT3">
+                                 <slotMember class="keyword">signal </slotMember>
+                                 <slotMember class="signal-ref">prob_target_&lt;0.15</slotMember>
+                              </slot>
+                           </item>
+                        </instBlock>
+                        <instBlock isUsed="false"/>
+                        <blocks>
+                           <block blockType="OPTIONAL"/>
+                           <block blockType="SINGLETON">
+                              <astText>While</astText>
+                           </block>
+                           <block blockType="OPTIONAL"/>
+                           <block blockType="SINGLETON">
+                              <astText>  </astText>
+                              <astSlot name="slotT4" type="pred"/>
+                              <astText>
+</astText>
+                              <astSlot name="choiceT4" type="choice"/>
+                              <astText>, </astText>
+                           </block>
+                           <block blockType="OPTIONAL">
+                              <astNoBreak/>
+                              <astText>until
+    </astText>
+                              <astSlot name="slotT2" type="pred"/>
+                              <astText>
+</astText>
+                              <astSlot name="choiceT1" type="choice"/>
+                              <astText>,</astText>
+                           </block>
+                           <block blockType="SINGLETON">
+                              <astText>  </astText>
+                              <astSlot name="slotT3" type="pred"/>
+                              <astText>
+shall also </astText>
+                              <astSlot name="choiceT2" type="choice"/>
+                              <astText>, </astText>
+                           </block>
+                           <block blockType="OPTIONAL"/>
+                        </blocks>
+                     </template>
+                  </data>
+                  <backwardsTr>SR1_1_1</backwardsTr>
+                  <forwardsTr>VR1_1_1_1</forwardsTr>
+                  <comment/>
+                  <isDerived>no</isDerived>
+                  <isSafety>yes</isSafety>
+                  <isSecurity>no</isSecurity>
+                  <verifiedBy>Other</verifiedBy>
+               </record>
+               <record id="REQ-195.00">
+                  <title>OK_Ex4_Temporal_always_stuck</title>
+                  <status>NO_ERRORS</status>
+                  <data>
+                     <template name="while" format="" type="REQUIREMENT">
+                        <instBlock isUsed="false"/>
+                        <instBlock isUsed="true">
+                           <item/>
+                        </instBlock>
+                        <instBlock isUsed="false"/>
+                        <instBlock isUsed="true">
+                           <item>
+                              <slot slotId="choiceT4">
+                                 <slotMember class="choice">is true</slotMember>
+                              </slot>
+                              <slot slotId="slotT4">
+                                 <slotMember class="keyword">signal </slotMember>
+                                 <slotMember class="signal-ref">constant_deliverMOD::rp_ref0::batteryCapacity set to 20</slotMember>
+                                 <slotMember class="op topOp"> and </slotMember>
+                                 <slotMember class="keyword">signal </slotMember>
+                                 <slotMember class="signal-ref">constant_deliverMOD::rp_ref0::chargeStep set to 4</slotMember>
+                              </slot>
+                           </item>
+                        </instBlock>
+                        <instBlock isUsed="true">
+                           <item>
+                              <slot slotId="choiceT1">
+                                 <slotMember class="choice">becomes true</slotMember>
+                              </slot>
+                              <slot slotId="slotT2">
+                                 <slotMember class="keyword">constant </slotMember>
+                                 <slotMember class="const-ref">term_not Forall</slotMember>
+                                 <slotMember class="op topOp"> and </slotMember>
+                                 <slotMember class="keyword">signal </slotMember>
+                                 <slotMember class="signal-ref">pathFormula_Finally deliverMOD::ctrl_ref0::stm_ref0 is in deliverMOD::ctrl_ref0::stm_ref0::Stuck</slotMember>
+                              </slot>
+                           </item>
+                        </instBlock>
+                        <instBlock isUsed="true">
+                           <item>
+                              <slot slotId="choiceT2">
+                                 <slotMember class="choice">be true</slotMember>
+                              </slot>
+                              <slot slotId="slotT3">
+                                 <slotMember class="keyword">signal </slotMember>
+                                 <slotMember class="signal-ref">NIL</slotMember>
+                              </slot>
+                           </item>
+                        </instBlock>
+                        <instBlock isUsed="false"/>
+                        <blocks>
+                           <block blockType="OPTIONAL"/>
+                           <block blockType="SINGLETON">
+                              <astText>While</astText>
+                           </block>
+                           <block blockType="OPTIONAL"/>
+                           <block blockType="SINGLETON">
+                              <astText>  </astText>
+                              <astSlot name="slotT4" type="pred"/>
+                              <astText>
+</astText>
+                              <astSlot name="choiceT4" type="choice"/>
+                              <astText>, </astText>
+                           </block>
+                           <block blockType="OPTIONAL">
+                              <astNoBreak/>
+                              <astText>until
+    </astText>
+                              <astSlot name="slotT2" type="pred"/>
+                              <astText>
+</astText>
+                              <astSlot name="choiceT1" type="choice"/>
+                              <astText>,</astText>
+                           </block>
+                           <block blockType="SINGLETON">
+                              <astText>  </astText>
+                              <astSlot name="slotT3" type="pred"/>
+                              <astText>
+shall also </astText>
+                              <astSlot name="choiceT2" type="choice"/>
+                              <astText>, </astText>
+                           </block>
+                           <block blockType="OPTIONAL"/>
+                        </blocks>
+                     </template>
+                  </data>
+                  <backwardsTr>SR1_1_3</backwardsTr>
+                  <forwardsTr>VR1_1_1_3</forwardsTr>
+                  <comment/>
+                  <isDerived>no</isDerived>
+                  <isSafety>yes</isSafety>
+                  <isSecurity>no</isSecurity>
+                  <verifiedBy>Other</verifiedBy>
+               </record>
+               <record id="REQ-196.00">
+                  <title>OK_Ex5_reward_moves_before_stuck</title>
+                  <status>NO_ERRORS</status>
+                  <data>
+                     <template name="while" format="" type="REQUIREMENT">
+                        <instBlock isUsed="false"/>
+                        <instBlock isUsed="true">
+                           <item/>
+                        </instBlock>
+                        <instBlock isUsed="false"/>
+                        <instBlock isUsed="true">
+                           <item>
+                              <slot slotId="choiceT4">
+                                 <slotMember class="choice">is true</slotMember>
+                              </slot>
+                              <slot slotId="slotT4">
+                                 <slotMember class="keyword">signal </slotMember>
+                                 <slotMember class="signal-ref">constant_deliverMOD::rp_ref0::batteryCapacity set to 20</slotMember>
+                                 <slotMember class="op topOp"> and </slotMember>
+                                 <slotMember class="keyword">signal </slotMember>
+                                 <slotMember class="signal-ref">constant_deliverMOD::rp_ref0::chargeStep set to 4</slotMember>
+                                 <slotMember class="op topOp"> and </slotMember>
+                                 <slotMember class="keyword">signal </slotMember>
+                                 <slotMember class="signal-ref">reward_event_deliverMOD::ctrl_ref0::stm_ref0::move.in</slotMember>
+                                 <slotMember class="op topOp"> and </slotMember>
+                                 <slotMember class="keyword">signal </slotMember>
+                                 <slotMember class="signal-ref">reward_value_true:1</slotMember>
+                              </slot>
+                           </item>
+                        </instBlock>
+                        <instBlock isUsed="true">
+                           <item>
+                              <slot slotId="choiceT1">
+                                 <slotMember class="choice">becomes true</slotMember>
+                              </slot>
+                              <slot slotId="slotT2">
+                                 <slotMember class="keyword">signal </slotMember>
+                                 <slotMember class="signal-ref">pathFormula_Reachable (deliverMOD::rp_ref0::c==0 /\ deliverMOD::ctrl_ref0::stm_ref1 is in deliverMOD::ctrl_ref0::stm_ref1:: batteryState)</slotMember>
+                              </slot>
+                           </item>
+                        </instBlock>
+                        <instBlock isUsed="true">
+                           <item>
+                              <slot slotId="choiceT2">
+                                 <slotMember class="choice">be true</slotMember>
+                              </slot>
+                              <slot slotId="slotT3">
+                                 <slotMember class="keyword">signal </slotMember>
+                                 <slotMember class="signal-ref">reward_target_&lt;6</slotMember>
+                              </slot>
+                           </item>
+                        </instBlock>
+                        <instBlock isUsed="false"/>
+                        <blocks>
+                           <block blockType="OPTIONAL"/>
+                           <block blockType="SINGLETON">
+                              <astText>While</astText>
+                           </block>
+                           <block blockType="OPTIONAL"/>
+                           <block blockType="SINGLETON">
+                              <astText>  </astText>
+                              <astSlot name="slotT4" type="pred"/>
+                              <astText>
+</astText>
+                              <astSlot name="choiceT4" type="choice"/>
+                              <astText>, </astText>
+                           </block>
+                           <block blockType="OPTIONAL">
+                              <astNoBreak/>
+                              <astText>until
+    </astText>
+                              <astSlot name="slotT2" type="pred"/>
+                              <astText>
+</astText>
+                              <astSlot name="choiceT1" type="choice"/>
+                              <astText>,</astText>
+                           </block>
+                           <block blockType="SINGLETON">
+                              <astText>  </astText>
+                              <astSlot name="slotT3" type="pred"/>
+                              <astText>
+shall also </astText>
+                              <astSlot name="choiceT2" type="choice"/>
+                              <astText>, </astText>
+                           </block>
+                           <block blockType="OPTIONAL"/>
+                        </blocks>
+                     </template>
+                  </data>
+                  <backwardsTr>SR1_1_2</backwardsTr>
+                  <forwardsTr>VR1_1_1_2</forwardsTr>
+                  <comment/>
+                  <isDerived>no</isDerived>
+                  <isSafety>yes</isSafety>
+                  <isSecurity>no</isSecurity>
+                  <verifiedBy>Other</verifiedBy>
+               </record>
+            </records>
+         </group>
+      </groups>
+   </reqGroups>
+</report>

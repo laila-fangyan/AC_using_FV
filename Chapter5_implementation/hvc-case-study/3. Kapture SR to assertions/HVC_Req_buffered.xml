@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<report id="D-RisQ/UC/SRS">
+   <reqGroups>
+      <groups>
+         <group groupId="REQ.1">
+            <title>HVC</title>
+            <records>
+               <record id="REQ-185.00">
+                  <title>actual system voltage Follows set-point</title>
+                  <status>NO_ERRORS</status>
+                  <data>
+                     <template name="while" format="" type="REQUIREMENT">
+                        <instBlock isUsed="false"/>
+                        <instBlock isUsed="true">
+                           <item/>
+                        </instBlock>
+                        <instBlock isUsed="false"/>
+                        <instBlock isUsed="true">
+                           <item>
+                              <slot slotId="choiceT4">
+                                 <slotMember class="choice">is true</slotMember>
+                              </slot>
+                              <slot slotId="slotT4">
+                                 <slotMember class="keyword">signal </slotMember>
+                                 <slotMember class="signal-ref">mod_sys::currentState.out.State_ClosedLoop</slotMember>
+                                 <slotMember class="op topOp"> and </slotMember>
+                                 <slotMember class="keyword">signal </slotMember>
+                                 <slotMember class="signal-ref">mod_sys::ext_setPoint.in?x__</slotMember>
+                              </slot>
+                           </item>
+                        </instBlock>
+                        <instBlock isUsed="false"/>
+                        <instBlock isUsed="true">
+                           <item>
+                              <slot slotId="choiceT2">
+                                 <slotMember class="choice">be true</slotMember>
+                              </slot>
+                              <slot slotId="slotT3">
+                                 <slotMember class="keyword">signal </slotMember>
+                                 <slotMember class="signal-ref">buffered_mod_sys::int_ActualHV.out!x__</slotMember>
+                              </slot>
+                           </item>
+                        </instBlock>
+                        <instBlock isUsed="false"/>
+                        <blocks>
+                           <block blockType="OPTIONAL"/>
+                           <block blockType="SINGLETON">
+                              <astText>While</astText>
+                           </block>
+                           <block blockType="OPTIONAL"/>
+                           <block blockType="SINGLETON">
+                              <astText>  </astText>
+                              <astSlot name="slotT4" type="pred"/>
+                              <astText>
+</astText>
+                              <astSlot name="choiceT4" type="choice"/>
+                              <astText/>
+                           </block>
+                           <block blockType="OPTIONAL"/>
+                           <block blockType="SINGLETON">
+                              <astText>  </astText>
+                              <astSlot name="slotT3" type="pred"/>
+                              <astText>
+shall also </astText>
+                              <astSlot name="choiceT2" type="choice"/>
+                              <astText>.</astText>
+                           </block>
+                           <block blockType="OPTIONAL"/>
+                        </blocks>
+                     </template>
+                  </data>
+                  <backwardsTr>SR1_1_1</backwardsTr>
+                  <forwardsTr>VR1_1_1_1</forwardsTr>
+                  <comment/>
+                  <isDerived>no</isDerived>
+                  <isSafety>yes</isSafety>
+                  <isSecurity>no</isSecurity>
+                  <verifiedBy>Other</verifiedBy>
+               </record>
+               <record id="REQ-186.00">
+                  <title>actual system voltage shall be zero if set-point is not set in error mode</title>
+                  <status>NO_ERRORS</status>
+                  <data>
+                     <template name="while" format="" type="REQUIREMENT">
+                        <instBlock isUsed="false"/>
+                        <instBlock isUsed="true">
+                           <item/>
+                        </instBlock>
+                        <instBlock isUsed="false"/>
+                        <instBlock isUsed="true">
+                           <item>
+                              <slot slotId="choiceT4">
+                                 <slotMember class="choice">is true</slotMember>
+                              </slot>
+                              <slot slotId="slotT4">
+                                 <slotMember class="keyword">signal </slotMember>
+                                 <slotMember class="signal-ref">mod_sys::currentState.out.State_ErrorMode</slotMember>
+                                 <slotMember class="op topOp"> and </slotMember>
+                                 <slotMember class="keyword">signal </slotMember>
+                                 <slotMember class="signal-ref">mod_sys::ext_setPoint.out.0</slotMember>
+                              </slot>
+                           </item>
+                        </instBlock>
+                        <instBlock isUsed="false"/>
+                        <instBlock isUsed="true">
+                           <item>
+                              <slot slotId="choiceT2">
+                                 <slotMember class="choice">be true</slotMember>
+                              </slot>
+                              <slot slotId="slotT3">
+                                 <slotMember class="keyword">signal </slotMember>
+                                 <slotMember class="signal-ref">buffered_mod_sys::int_ActualHV.out.0</slotMember>
+                              </slot>
+                           </item>
+                        </instBlock>
+                        <instBlock isUsed="false"/>
+                        <blocks>
+                           <block blockType="OPTIONAL"/>
+                           <block blockType="SINGLETON">
+                              <astText>While</astText>
+                           </block>
+                           <block blockType="OPTIONAL"/>
+                           <block blockType="SINGLETON">
+                              <astText>  </astText>
+                              <astSlot name="slotT4" type="pred"/>
+                              <astText>
+</astText>
+                              <astSlot name="choiceT4" type="choice"/>
+                              <astText/>
+                           </block>
+                           <block blockType="OPTIONAL"/>
+                           <block blockType="SINGLETON">
+                              <astText>  </astText>
+                              <astSlot name="slotT3" type="pred"/>
+                              <astText>
+shall also </astText>
+                              <astSlot name="choiceT2" type="choice"/>
+                              <astText>.</astText>
+                           </block>
+                           <block blockType="OPTIONAL"/>
+                        </blocks>
+                     </template>
+                  </data>
+                  <backwardsTr>SR1_2_1</backwardsTr>
+                  <forwardsTr>VR1_2_1_1</forwardsTr>
+                  <comment/>
+                  <isDerived>no</isDerived>
+                  <isSafety>yes</isSafety>
+                  <isSecurity>no</isSecurity>
+                  <verifiedBy>Other</verifiedBy>
+               </record>
+               <record id="REQ-184.00">
+                  <title>SetPoint set to 0 when 24V power off</title>
+                  <status>NO_ERRORS</status>
+                  <data>
+                     <template name="while" format="" type="REQUIREMENT">
+                        <instBlock isUsed="false"/>
+                        <instBlock isUsed="true">
+                           <item/>
+                        </instBlock>
+                        <instBlock isUsed="false"/>
+                        <instBlock isUsed="true">
+                           <item>
+                              <slot slotId="choiceT4">
+                                 <slotMember class="choice">is true</slotMember>
+                              </slot>
+                              <slot slotId="slotT4">
+                                 <slotMember class="keyword">signal </slotMember>
+                                 <slotMember class="signal-ref">mod_sys::ext_pow24VStatus.in.Power_Off</slotMember>
+                              </slot>
+                           </item>
+                        </instBlock>
+                        <instBlock isUsed="false"/>
+                        <instBlock isUsed="true">
+                           <item>
+                              <slot slotId="choiceT2">
+                                 <slotMember class="choice">be true</slotMember>
+                              </slot>
+                              <slot slotId="slotT3">
+                                 <slotMember class="keyword">signal </slotMember>
+                                 <slotMember class="signal-ref">mod_sys::ext_setPoint.out.0</slotMember>
+                              </slot>
+                           </item>
+                        </instBlock>
+                        <instBlock isUsed="false"/>
+                        <blocks>
+                           <block blockType="OPTIONAL"/>
+                           <block blockType="SINGLETON">
+                              <astText>While</astText>
+                           </block>
+                           <block blockType="OPTIONAL"/>
+                           <block blockType="SINGLETON">
+                              <astText>  </astText>
+                              <astSlot name="slotT4" type="pred"/>
+                              <astText>
+</astText>
+                              <astSlot name="choiceT4" type="choice"/>
+                              <astText/>
+                           </block>
+                           <block blockType="OPTIONAL"/>
+                           <block blockType="SINGLETON">
+                              <astText>  </astText>
+                              <astSlot name="slotT3" type="pred"/>
+                              <astText>
+shall also </astText>
+                              <astSlot name="choiceT2" type="choice"/>
+                              <astText>.</astText>
+                           </block>
+                           <block blockType="OPTIONAL"/>
+                        </blocks>
+                     </template>
+                  </data>
+                  <backwardsTr>SR1_3_1</backwardsTr>
+                  <forwardsTr>VR1_3_1_1</forwardsTr>
+                  <comment/>
+                  <isDerived>no</isDerived>
+                  <isSafety>yes</isSafety>
+                  <isSecurity>no</isSecurity>
+                  <verifiedBy>Other</verifiedBy>
+               </record>
+            </records>
+         </group>
+      </groups>
+   </reqGroups>
+</report>

@@ -1,0 +1,5 @@
+rule AC2Diagram {
+ 
+  template : "GSN_AC_R1.egl"
+  target : "GSN_AC_R1.dot"
+}

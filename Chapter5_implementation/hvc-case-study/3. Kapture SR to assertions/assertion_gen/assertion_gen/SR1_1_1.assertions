@@ -1,0 +1,28 @@
+untimed csp SR1_1_1 csp-begin
+
+channel buffered_int_ActualHV : core_real
+channel read : core_real
+
+BufferedOutput = (Buffer [| {|read|} |] Output) \{|read|}
+
+-- Output simply outputs what it reads.
+Output = read?x__ -> mod_sys::int_ActualHV.out!x__ -> Output
+
+-- A buffer, whose current 'value' can be overwritten.
+Buffer = buffered_int_ActualHV?x__ -> (read!x__ -> Buffer [] Buffer)
+
+SR1_1_1 = (Behaviour [| {| buffered_int_ActualHV |} |] BufferedOutput) \ {|buffered_int_ActualHV|}
+
+Behaviour = CHAOS(Events) 
+		[| {|mod_sys::currentState.out.State_ClosedLoop|} |> 
+		(ClosedLoop_ctrl /\  Behaviour)
+ClosedLoop_ctrl = mod_sys::ext_setPoint.in?x__ -> buffered_int_ActualHV!x__ -> ClosedLoop_ctrl
+csp-end
+
+untimed csp SR1_1_1_implement associated to mod_sys csp-begin 
+SR1_1_1_implement = mod_sys::O__(0) |\ {|mod_sys::currentState.out.State_ClosedLoop,mod_sys::int_ActualHV.out,mod_sys::ext_setPoint.in?x__|}				
+csp-end
+
+untimed assertion A_SR1_1_1 : SR1_1_1_implement refines SR1_1_1  in the traces model
+
+

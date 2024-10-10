@@ -1,0 +1,213 @@
+digraph assurance_case{
+
+claim_1 [shape=rect 
+label=< <FONT FACE="times bold">Claim for H1</FONT> <br />  <FONT FACE="times">Hazard H1 {Fire in the painting cell} sh-<br />all be avoided. </FONT>> 
+width=4 
+height=1.7
+fixedsize=true]
+
+strategy_1 [shape=parallelogram
+label=< <FONT FACE="times bold">Strategy</FONT> <br />  <FONT FACE="times">Strategy: Argument over identi-<br />fied causes. </FONT>> 
+width=4 height=1.0
+fixedsize=true]
+
+claim_1 -> strategy_1 
+
+claim_2 [shape=rect 
+label=< <FONT FACE="times bold">Claim for C1</FONT> <br />  <FONT FACE="times">Cause C1 {discharge sparks causing ignit-<br />ion due to high voltage output } shall b-<br />e avoided. </FONT>> 
+width=4 
+height=1.7
+fixedsize=true]
+
+strategy_2 [shape=parallelogram
+label=< <FONT FACE="times bold">Strategy</FONT> <br />  <FONT FACE="times">Strategy: Argument over identi-<br />fied subcauses.</FONT>> 
+width=4 height=1.0
+fixedsize=true]
+
+claim_2 -> strategy_2 
+strategy_1 -> claim_2 
+
+claim_3 [shape=rect 
+label=< <FONT FACE="times bold">Claim for C1_1</FONT> <br />  <FONT FACE="times">Cause C1_1 {HVC board did not respond to<br /> any  set_point changes, and had a const-<br />ant actual value } shall be avoided. </FONT>> 
+width=4 
+height=1.7
+fixedsize=true]
+
+strategy_3 [shape=parallelogram
+label=< <FONT FACE="times bold">Strategy</FONT> <br />  <FONT FACE="times">Strategy: Argue over identifie-<br />d control measures.</FONT>> 
+width=4 height=1.0
+fixedsize=true]
+
+claim_3 -> strategy_3 
+strategy_2 -> claim_3 
+
+claim_4 [shape=rect 
+label=< <FONT FACE="times bold">Claim for SR1_1_1</FONT> <br />  <FONT FACE="times">Safety measure SR1_1_1 {the actual syste-<br />m voltage shall always follows the set-p-<br />oint in normal operation 
+(P1, Spec1A) }<br /> shall be implemented. </FONT>> 
+width=4 
+height=1.7
+fixedsize=true]
+
+strategy_4 [shape=parallelogram
+label=< <FONT FACE="times bold">Strategy</FONT> <br />  <FONT FACE="times">Strategy: Argue over V & V.</FONT>> 
+width=4 height=1.0
+fixedsize=true]
+
+claim_4 -> strategy_4 
+strategy_3 -> claim_4 
+
+claim_5 [shape=rect 
+label=< <FONT FACE="times bold">Claim for C1_2</FONT> <br />  <FONT FACE="times">Cause C1_2 {set_point is not set, but HV-<br />_Actual had a non_zero value } shall be <br />avoided. </FONT>> 
+width=4 
+height=1.7
+fixedsize=true]
+
+strategy_5 [shape=parallelogram
+label=< <FONT FACE="times bold">Strategy</FONT> <br />  <FONT FACE="times">Strategy: Argue over identifie-<br />d control measures.</FONT>> 
+width=4 height=1.0
+fixedsize=true]
+
+claim_5 -> strategy_5 
+
+claim_6 [shape=rect 
+label=< <FONT FACE="times bold">Claim for SR1_2_1</FONT> <br />  <FONT FACE="times">Safety measure SR1_2_1 {the actual syste-<br />m voltage shall be zero if set-point is <br />not set  in error mode (P1, Spec1B) } sh-<br />all be implemented. </FONT>> 
+width=4 
+height=1.7
+fixedsize=true]
+
+strategy_6 [shape=parallelogram
+label=< <FONT FACE="times bold">Strategy</FONT> <br />  <FONT FACE="times">Strategy: Argue over V & V.</FONT>> 
+width=4 height=1.0
+fixedsize=true]
+
+claim_6 -> strategy_6 
+strategy_5 -> claim_6 
+
+claim_7 [shape=rect 
+label=< <FONT FACE="times bold">Claim for C1_3</FONT> <br />  <FONT FACE="times">Cause C1_3 {HV_SetPoint is not disabled <br />causing HVC to continue to set out high <br />voltage when 24v power fails. } shall be<br /> avoided. </FONT>> 
+width=4 
+height=1.7
+fixedsize=true]
+
+strategy_7 [shape=parallelogram
+label=< <FONT FACE="times bold">Strategy</FONT> <br />  <FONT FACE="times">Strategy: Argue over identifie-<br />d control measures.</FONT>> 
+width=4 height=1.0
+fixedsize=true]
+
+claim_7 -> strategy_7 
+strategy_2 -> claim_7 
+
+claim_8 [shape=rect 
+label=< <FONT FACE="times bold">Claim for spec3</FONT> <br />  <FONT FACE="times">Safety measure spec3 {HV_SetPoint shall <br />be set to 0 when the 24V power signal is<br /> switched off 
+(P3, Spec3) } shall be im-<br />plemented. </FONT>> 
+width=4 
+height=1.7
+fixedsize=true]
+
+strategy_8 [shape=parallelogram
+label=< <FONT FACE="times bold">Strategy</FONT> <br />  <FONT FACE="times">Strategy: Argue over V & V.</FONT>> 
+width=4 height=1.0
+fixedsize=true]
+
+claim_8 -> strategy_8 
+strategy_7 -> claim_8 
+
+claim_9 [shape=rect 
+label=< <FONT FACE="times bold">Claim for VR1_1_1_1</FONT> <br />  <FONT FACE="times">Safety measure shall be verified by {FDR<br /> refinement checking }</FONT>> 
+width=4 
+height=1.7
+fixedsize=true]
+
+strategy_4 -> claim_9
+
+evidence_1_1[shape=circle
+label=< <FONT FACE="times bold"> Evidence </FONT> <br />  <FONT FACE="times"> Evidence: FDR result<br /> and reference </FONT>> 
+width=2.3
+fixedsize=true]
+
+claim_9 -> evidence_1_1
+
+claim_10 [shape=rect 
+label=< <FONT FACE="times bold">Claim for VA1_1_1_1</FONT> <br />  <FONT FACE="times">Safety measure shall be validated by {st-<br />ate reachability }</FONT>> 
+width=4 
+height=1.7
+fixedsize=true]
+
+strategy_4 -> claim_10
+
+evidence_2_1[shape=circle
+label=< <FONT FACE="times bold"> Evidence </FONT> <br />  <FONT FACE="times"> Evidence: FDR result<br /> and reference </FONT>> 
+width=2.3
+fixedsize=true]
+
+claim_10 -> evidence_2_1
+
+claim_11 [shape=rect 
+label=< <FONT FACE="times bold">Claim for VR1_2_1_1</FONT> <br />  <FONT FACE="times">Safety measure shall be verified by {FDR<br /> refinement checking }</FONT>> 
+width=4 
+height=1.7
+fixedsize=true]
+
+strategy_6 -> claim_11
+
+evidence_3_1[shape=circle
+label=< <FONT FACE="times bold"> Evidence </FONT> <br />  <FONT FACE="times"> Evidence: FDR result<br /> and reference </FONT>> 
+width=2.3
+fixedsize=true]
+
+claim_11 -> evidence_3_1
+
+claim_12 [shape=rect 
+label=< <FONT FACE="times bold">Claim for VA1_2_1_1</FONT> <br />  <FONT FACE="times">Safety measure shall be validated by {st-<br />ate reachability }</FONT>> 
+width=4 
+height=1.7
+fixedsize=true]
+
+strategy_6 -> claim_12
+
+evidence_4_1[shape=circle
+label=< <FONT FACE="times bold"> Evidence </FONT> <br />  <FONT FACE="times"> Evidence: FDR result<br /> and reference </FONT>> 
+width=2.3
+fixedsize=true]
+
+claim_12 -> evidence_4_1
+
+claim_13 [shape=rect 
+label=< <FONT FACE="times bold">Claim for VR1_3_1_1</FONT> <br />  <FONT FACE="times">Safety measure shall be verified by {FDR<br /> refinement checking }</FONT>> 
+width=4 
+height=1.7
+fixedsize=true]
+
+strategy_8 -> claim_13
+
+evidence_5_1[shape=circle
+label=< <FONT FACE="times bold"> Evidence </FONT> <br />  <FONT FACE="times"> FDR checking result <br />for VR1_3_1_1 is "tr-<br />ue" </FONT>> 
+width=2.3
+fixedsize=true]
+
+claim_13 -> evidence_5_1
+
+claim_14 [shape=rect 
+label=< <FONT FACE="times bold">Claim for VA1_3_1_1</FONT> <br />  <FONT FACE="times">Safety measure shall be validated by {st-<br />ate reachability }</FONT>> 
+width=4 
+height=1.7
+fixedsize=true]
+
+strategy_8 -> claim_14
+
+evidence_6_1[shape=circle
+label=< <FONT FACE="times bold"> Evidence </FONT> <br />  <FONT FACE="times"> Evidence: FDR result<br /> and reference </FONT>> 
+width=2.3
+fixedsize=true]
+
+claim_14 -> evidence_6_1
+
+claim_16 [shape=rect 
+label=< <FONT FACE="times bold">Claim for C1_4</FONT> <br />  <FONT FACE="times">Cause C1_4 {HVC limit supervision fails <br />} shall be avoided.</FONT>> 
+width=4 
+height=1.7
+fixedsize=true]
+
+strategy_2 -> claim_16
+}
+

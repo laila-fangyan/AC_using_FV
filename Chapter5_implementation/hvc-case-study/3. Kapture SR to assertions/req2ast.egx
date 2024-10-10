@@ -1,0 +1,18 @@
+//configuration
+//M = HVC_Req_buffered.xml
+//X in egl= hvc.rct.model
+
+
+rule Req2Assertion
+transform req : M!t_record {
+
+guard :  req.a_id.isDefined()
+parameters{
+
+var params : new Map;
+params.put("sr_index", req.e_backwardsTr.text);
+return params;}
+
+template : "req2ast.egl"
+target : "assertion_gen/" + req.e_backwardsTr.text + ".assertions"
+}

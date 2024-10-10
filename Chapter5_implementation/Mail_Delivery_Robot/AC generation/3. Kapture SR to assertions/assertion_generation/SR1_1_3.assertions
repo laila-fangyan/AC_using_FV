@@ -1,0 +1,6 @@
+prob property T_SR1_1_3:
+not Forall [Finally deliverMOD::ctrl_ref0::stm_ref0 is in deliverMOD::ctrl_ref0::stm_ref0::Stuck]
+
+with constant
+deliverMOD::rp_ref0::batteryCapacity set to 20,
+deliverMOD::rp_ref0::chargeStep set to 4

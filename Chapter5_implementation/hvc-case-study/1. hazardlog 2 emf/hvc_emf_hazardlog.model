@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ASCII"?>
+<hazardlog_:HazardLog xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:hazardlog_="http://org.eclipse.acme/1.0/hazardlog">
+  <hazards description="Fire in the painting cell" number="H1">
+    <causes description="discharge sparks causing ignition due to high voltage output" number="C1">
+      <causes description="HVC board did not respond to any  set_point changes, and had a constant actual value" number="C1_1">
+        <controlMeasure description="the actual system voltage shall always follows the set-point in normal operation &#xA;(P1, Spec1A)" number="SR1_1_1">
+          <verification description="FDR refinement checking" number="VR1_1_1_1">
+            <evidence description="FDR result and reference"/>
+          </verification>
+          <validation description="state reachability" number="VA1_1_1_1">
+            <evidence description="FDR result and reference"/>
+          </validation>
+        </controlMeasure>
+      </causes>
+      <causes description="set_point is not set, but HV_Actual had a non_zero value" number="C1_2">
+        <controlMeasure description="the actual system voltage shall be zero if set-point is not set  in error mode (P1, Spec1B)" number="SR1_2_1">
+          <verification description="FDR refinement checking" number="VR1_2_1_1">
+            <evidence description="FDR result and reference"/>
+          </verification>
+          <validation description="state reachability" number="VA1_2_1_1">
+            <evidence description="FDR result and reference"/>
+          </validation>
+        </controlMeasure>
+      </causes>
+      <causes description="HV_SetPoint is not disabled causing HVC to continue to set out high voltage when 24v power fails." number="C1_3">
+        <controlMeasure description="HV_SetPoint shall be set to 0 when the 24V power signal is switched off &#xA;(P3, Spec3)" number="SR1_3_1">
+          <verification description="FDR refinement checking" number="VR1_3_1_1">
+            <evidence description="FDR result and reference"/>
+          </verification>
+          <validation description="state reachability" number="VA1_3_1_1">
+            <evidence description="FDR result and reference"/>
+          </validation>
+        </controlMeasure>
+      </causes>
+      <causes description="HVC limit supervision fails" number="C1_4"/>
+    </causes>
+  </hazards>
+</hazardlog_:HazardLog>

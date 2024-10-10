@@ -1,0 +1,8 @@
+prob property P_SR1_1_1:
+	Prob<0.5 of [Finally deliverMOD::rp_ref0::p==x /\ deliverMOD::rp_ref0::c==0]
+with constant
+deliverMOD::rp_ref0::batteryCapacity set to 20,
+deliverMOD::rp_ref0::chargeStep set to 4,
+x from set  {1 to 8}
+const x : core::nat
+

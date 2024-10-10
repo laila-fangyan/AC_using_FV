@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:argumentation_="http://omg.sacm/2.0/argumentation">
+  <argumentation_:ArgumentPackage xmi:id="_I0bJQOeNEe2P6cjXDr_lzg"/>
+  <argumentation_:Claim xmi:id="_I0bwUOeNEe2P6cjXDr_lzg">
+    <name xmi:id="_I0gBwOeNEe2P6cjXDr_lzg" lang="English" content="Claim for H1"/>
+    <description xmi:id="_I0h28OeNEe2P6cjXDr_lzg">
+      <content xmi:id="_I0h28eeNEe2P6cjXDr_lzg">
+        <value xmi:id="_I0jFEOeNEe2P6cjXDr_lzg" lang="English" content="Hazard H1 {Robot fails to deliver the mails} shall be avoided."/>
+      </content>
+    </description>
+  </argumentation_:Claim>
+  <argumentation_:AssertedInference xmi:id="_I0jsIOeNEe2P6cjXDr_lzg" source="_I0jsJOeNEe2P6cjXDr_lzg _I0k6ReeNEe2P6cjXDr_lzg _I0k6SueNEe2P6cjXDr_lzg" target="_I0bwUOeNEe2P6cjXDr_lzg" reasoning="_I0jsIeeNEe2P6cjXDr_lzg"/>
+  <argumentation_:ArgumentReasoning xmi:id="_I0jsIeeNEe2P6cjXDr_lzg">
+    <content xmi:id="_I0jsIueNEe2P6cjXDr_lzg">
+      <value xmi:id="_I0jsI-eNEe2P6cjXDr_lzg" lang="English" content="Strategy: Argument over identified causes."/>
+    </content>
+  </argumentation_:ArgumentReasoning>
+  <argumentation_:Claim xmi:id="_I0jsJOeNEe2P6cjXDr_lzg">
+    <name xmi:id="_I0jsJeeNEe2P6cjXDr_lzg" lang="English" content="Claim for c1_1"/>
+    <description xmi:id="_I0jsJueNEe2P6cjXDr_lzg">
+      <content xmi:id="_I0jsJ-eNEe2P6cjXDr_lzg">
+        <value xmi:id="_I0jsKOeNEe2P6cjXDr_lzg" lang="English" content="Cause c1_1 {Robot runs out of power at the non_charging position } shall be avoided."/>
+      </content>
+    </description>
+  </argumentation_:Claim>
+  <argumentation_:AssertedInference xmi:id="_I0jsKeeNEe2P6cjXDr_lzg" source="_I0jsLeeNEe2P6cjXDr_lzg _I0kTN-eNEe2P6cjXDr_lzg _I0kTRueNEe2P6cjXDr_lzg" target="_I0jsJOeNEe2P6cjXDr_lzg" reasoning="_I0jsKueNEe2P6cjXDr_lzg"/>
+  <argumentation_:ArgumentReasoning xmi:id="_I0jsKueNEe2P6cjXDr_lzg">
+    <content xmi:id="_I0jsK-eNEe2P6cjXDr_lzg">
+      <value xmi:id="_I0jsLOeNEe2P6cjXDr_lzg" lang="English" content="Strategy: Argue over identified control measures."/>
+    </content>
+  </argumentation_:ArgumentReasoning>
+  <argumentation_:Claim xmi:id="_I0jsLeeNEe2P6cjXDr_lzg">
+    <name xmi:id="_I0jsLueNEe2P6cjXDr_lzg" lang="English" content="Claim for SR1_1_1"/>
+    <description xmi:id="_I0jsL-eNEe2P6cjXDr_lzg">
+      <content xmi:id="_I0jsMOeNEe2P6cjXDr_lzg">
+        <value xmi:id="_I0jsMeeNEe2P6cjXDr_lzg" lang="English" content="Safety measure SR1_1_1 {the probability for the robot to run out of power at each non_charging position shall be less than 0.5 when batteryCapacity and chargeStep are 20 and 4 } shall be implemented."/>
+      </content>
+    </description>
+  </argumentation_:Claim>
+  <argumentation_:AssertedInference xmi:id="_I0jsMueNEe2P6cjXDr_lzg" source="_I0kTMeeNEe2P6cjXDr_lzg" target="_I0jsLeeNEe2P6cjXDr_lzg" reasoning="_I0jsM-eNEe2P6cjXDr_lzg"/>
+  <argumentation_:ArgumentReasoning xmi:id="_I0jsM-eNEe2P6cjXDr_lzg">
+    <content xmi:id="_I0jsNOeNEe2P6cjXDr_lzg">
+      <value xmi:id="_I0kTMOeNEe2P6cjXDr_lzg" lang="English" content="Strategy: Argue over V &amp; V."/>
+    </content>
+  </argumentation_:ArgumentReasoning>
+  <argumentation_:Claim xmi:id="_I0kTMeeNEe2P6cjXDr_lzg">
+    <name xmi:id="_I0kTMueNEe2P6cjXDr_lzg" lang="English" content="Claim for VR1_1_1_1"/>
+    <description xmi:id="_I0kTM-eNEe2P6cjXDr_lzg">
+      <content xmi:id="_I0kTNOeNEe2P6cjXDr_lzg">
+        <value xmi:id="_I0kTNeeNEe2P6cjXDr_lzg" lang="English" content="Safety measure shall be verified by {PRISM model checking }"/>
+      </content>
+    </description>
+  </argumentation_:Claim>
+  <argumentation_:AssertedEvidence xmi:id="_I0kTNueNEe2P6cjXDr_lzg" source="_I0k6T-eNEe2P6cjXDr_lzg" target="_I0kTMeeNEe2P6cjXDr_lzg"/>
+  <argumentation_:Claim xmi:id="_I0kTN-eNEe2P6cjXDr_lzg">
+    <name xmi:id="_I0kTOOeNEe2P6cjXDr_lzg" lang="English" content="Claim for SR1_1_2"/>
+    <description xmi:id="_I0kTOeeNEe2P6cjXDr_lzg">
+      <content xmi:id="_I0kTOueNEe2P6cjXDr_lzg">
+        <value xmi:id="_I0kTO-eNEe2P6cjXDr_lzg" lang="English" content="Safety measure SR1_1_2 {Average number of moves before running out of power shall be larger than 8 when batteryCapacity and chargeStep are 20 and 4 } shall be implemented."/>
+      </content>
+    </description>
+  </argumentation_:Claim>
+  <argumentation_:AssertedInference xmi:id="_I0kTPOeNEe2P6cjXDr_lzg" source="_I0kTQOeNEe2P6cjXDr_lzg" target="_I0kTN-eNEe2P6cjXDr_lzg" reasoning="_I0kTPeeNEe2P6cjXDr_lzg"/>
+  <argumentation_:ArgumentReasoning xmi:id="_I0kTPeeNEe2P6cjXDr_lzg">
+    <content xmi:id="_I0kTPueNEe2P6cjXDr_lzg">
+      <value xmi:id="_I0kTP-eNEe2P6cjXDr_lzg" lang="English" content="Strategy: Argue over V &amp; V."/>
+    </content>
+  </argumentation_:ArgumentReasoning>
+  <argumentation_:Claim xmi:id="_I0kTQOeNEe2P6cjXDr_lzg">
+    <name xmi:id="_I0kTQeeNEe2P6cjXDr_lzg" lang="English" content="Claim for VR1_1_1_2"/>
+    <description xmi:id="_I0kTQueNEe2P6cjXDr_lzg">
+      <content xmi:id="_I0kTQ-eNEe2P6cjXDr_lzg">
+        <value xmi:id="_I0kTROeNEe2P6cjXDr_lzg" lang="English" content="Safety measure shall be verified by {PRISM model checking }"/>
+      </content>
+    </description>
+  </argumentation_:Claim>
+  <argumentation_:AssertedEvidence xmi:id="_I0kTReeNEe2P6cjXDr_lzg" source="/26" target="_I0kTQOeNEe2P6cjXDr_lzg"/>
+  <argumentation_:Claim xmi:id="_I0kTRueNEe2P6cjXDr_lzg">
+    <name xmi:id="_I0kTR-eNEe2P6cjXDr_lzg" lang="English" content="Claim for SR1_1_3"/>
+    <description xmi:id="_I0kTSOeNEe2P6cjXDr_lzg">
+      <content xmi:id="_I0kTSeeNEe2P6cjXDr_lzg">
+        <value xmi:id="_I0kTSueNEe2P6cjXDr_lzg" lang="English" content="Safety measure SR1_1_3 {There is a path that the robot won't get stuck } shall be implemented."/>
+      </content>
+    </description>
+  </argumentation_:Claim>
+  <argumentation_:AssertedInference xmi:id="_I0kTS-eNEe2P6cjXDr_lzg" source="_I0kTT-eNEe2P6cjXDr_lzg" target="_I0kTRueNEe2P6cjXDr_lzg" reasoning="_I0kTTOeNEe2P6cjXDr_lzg"/>
+  <argumentation_:ArgumentReasoning xmi:id="_I0kTTOeNEe2P6cjXDr_lzg">
+    <content xmi:id="_I0kTTeeNEe2P6cjXDr_lzg">
+      <value xmi:id="_I0kTTueNEe2P6cjXDr_lzg" lang="English" content="Strategy: Argue over V &amp; V."/>
+    </content>
+  </argumentation_:ArgumentReasoning>
+  <argumentation_:Claim xmi:id="_I0kTT-eNEe2P6cjXDr_lzg">
+    <name xmi:id="_I0kTUOeNEe2P6cjXDr_lzg" lang="English" content="Claim for VR1_1_1_3"/>
+    <description xmi:id="_I0kTUeeNEe2P6cjXDr_lzg">
+      <content xmi:id="_I0k6QOeNEe2P6cjXDr_lzg">
+        <value xmi:id="_I0k6QeeNEe2P6cjXDr_lzg" lang="English" content="Safety measure shall be verified by {PRISM model checking }"/>
+      </content>
+    </description>
+  </argumentation_:Claim>
+  <argumentation_:AssertedEvidence xmi:id="_I0k6QueNEe2P6cjXDr_lzg" source="_I0k6Q-eNEe2P6cjXDr_lzg" target="_I0kTT-eNEe2P6cjXDr_lzg"/>
+  <argumentation_:ArtifactReference xmi:id="_I0k6Q-eNEe2P6cjXDr_lzg">
+    <name xmi:id="_I0k6ROeNEe2P6cjXDr_lzg" lang="English" content="Evidence: PRISM model checking results 3"/>
+  </argumentation_:ArtifactReference>
+  <argumentation_:Claim xmi:id="_I0k6ReeNEe2P6cjXDr_lzg">
+    <name xmi:id="_I0k6RueNEe2P6cjXDr_lzg" lang="English" content="Claim for c1_2"/>
+    <description xmi:id="_I0k6R-eNEe2P6cjXDr_lzg">
+      <content xmi:id="_I0k6SOeNEe2P6cjXDr_lzg">
+        <value xmi:id="_I0k6SeeNEe2P6cjXDr_lzg" lang="English" content="Cause c1_2 {Robot failure in hardware } shall be avoided."/>
+      </content>
+    </description>
+  </argumentation_:Claim>
+  <argumentation_:Claim xmi:id="_I0k6SueNEe2P6cjXDr_lzg">
+    <name xmi:id="_I0k6S-eNEe2P6cjXDr_lzg" lang="English" content="Claim for c1_3"/>
+    <description xmi:id="_I0k6TOeNEe2P6cjXDr_lzg">
+      <content xmi:id="_I0k6TeeNEe2P6cjXDr_lzg">
+        <value xmi:id="_I0k6TueNEe2P6cjXDr_lzg" lang="English" content="Cause c1_3 {Robot failure in software } shall be avoided."/>
+      </content>
+    </description>
+  </argumentation_:Claim>
+  <argumentation_:ArtifactReference xmi:id="_I0k6T-eNEe2P6cjXDr_lzg">
+    <name xmi:id="_I0k6UOeNEe2P6cjXDr_lzg" content="PRISM checking result for VR1_1_1_1 is &quot;false&quot;"/>
+  </argumentation_:ArtifactReference>
+  <argumentation_:ArtifactReference>
+    <name content="PRISM checking result for VR1_1_1_2 is &quot;true&quot;"/>
+  </argumentation_:ArtifactReference>
+</xmi:XMI>

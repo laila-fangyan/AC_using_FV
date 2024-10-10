@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ASCII"?>
+<hazardlog_:HazardLog xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:hazardlog_="http://org.eclipse.acme/1.0/hazardlog">
+  <hazards description="Robot fails to deliver the mails" number="H1">
+    <causes description="Robot runs out of power at the non_charging position" number="c1_1">
+      <controlMeasure description="the probability for the robot to run out of power at each non_charging position shall be less than 0.5 when batteryCapacity and chargeStep are 20 and 4" number="SR1_1_1">
+        <verification description="PRISM model checking" number="VR1_1_1_1">
+          <evidence description="PRISM model checking results 1"/>
+        </verification>
+      </controlMeasure>
+      <controlMeasure description="Average number of moves before running out of power shall be larger than 8 when batteryCapacity and chargeStep are 20 and 4" number="SR1_1_2">
+        <verification description="PRISM model checking" number="VR1_1_1_2">
+          <evidence description="PRISM model checking results 2"/>
+        </verification>
+      </controlMeasure>
+      <controlMeasure description="There is a path that the robot won't get stuck" number="SR1_1_3">
+        <verification description="PRISM model checking" number="VR1_1_1_3">
+          <evidence description="PRISM model checking results 3"/>
+        </verification>
+      </controlMeasure>
+    </causes>
+    <causes description="Robot failure in hardware" number="c1_2"/>
+    <causes description="Robot failure in software" number="c1_3"/>
+  </hazards>
+</hazardlog_:HazardLog>
